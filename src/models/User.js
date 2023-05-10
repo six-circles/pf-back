@@ -12,7 +12,7 @@ const userSchema = new Schema(
       required: true,
       unique: true,
     },
-    address: {
+    nacimiento: {
       type: String,
       required: true,
     },
