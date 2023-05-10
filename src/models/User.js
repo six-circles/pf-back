@@ -13,7 +13,6 @@ const userSchema = new Schema(
     },
     address: {
       type: String,
-      required: true,
     },
     phone: {
       type: Number,
@@ -25,6 +24,7 @@ const userSchema = new Schema(
     },
     birthday: {
       type: Date,
+      required: true,
     },
   },
   {
