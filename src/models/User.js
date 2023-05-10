@@ -12,9 +12,8 @@ const userSchema = new Schema(
       required: true,
       unique: true,
     },
-    nacimiento: {
+    address: {
       type: String,
-      required: true,
     },
     phone: {
       type: Number,
@@ -22,6 +21,10 @@ const userSchema = new Schema(
     },
     password: {
       type: String,
+      required: true,
+    },
+    birthday: {
+      type: Date,
       required: true,
     },
   },
