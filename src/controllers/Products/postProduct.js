@@ -1,7 +1,8 @@
 const Product = require("../../models/Product");
 
 const postProduct = async (req, res) => {
-  const { title, image, punctuations, description, stock, comments } = req.body;
+  const { title, image, punctuations, description, stock, comments, price } =
+    req.body;
   try {
     if (
       !title ||
@@ -9,6 +10,7 @@ const postProduct = async (req, res) => {
       !punctuations ||
       !description ||
       !stock ||
+      !price ||
       !comments
     )
       throw Error("Faltan datos");
@@ -16,6 +18,7 @@ const postProduct = async (req, res) => {
     const newProduct = await Product.create({
       title: title,
       image: image,
+      price: price,
       punctuations: punctuations,
       description: description,
       stock: stock,
