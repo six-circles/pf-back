@@ -21,7 +21,7 @@ const postProduct = async (req, res) => {
       stock: stock,
       comments: comments,
     });
-    res.status(201).json("Product created", newProduct);
+    res.status(201).json({ message: "Product created", user: newProduct });
   } catch (err) {
     res.status(400).json({ error: err.message });
   }
