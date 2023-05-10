@@ -23,7 +23,7 @@ const userSchema = new Schema(
       required: true,
     },
     birthday: {
-      type: Date,
+      type: String,
       required: true,
     },
     punctuation: {
