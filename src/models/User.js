@@ -26,6 +26,12 @@ const userSchema = new Schema(
       type: Date,
       required: true,
     },
+    punctuation: {
+      type: Number,
+    },
+    totalSales: {
+      type: Number,
+    },
   },
   {
     timestamps: true,

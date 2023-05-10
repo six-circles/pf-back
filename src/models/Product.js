@@ -21,22 +21,12 @@ const productSchema = new Schema(
       type: Number,
       required: true,
     },
-    comments: [
-      {
-        user: {
-          type: String,
-          required: true,
-        },
-        body: {
-          type: String,
-          required: true,
-        },
-        punctuation: {
-          type: Number,
-          required: true,
-        },
-      },
-    ],
+    sales: {
+      type: Number,
+    },
+    // mandar los comments
+    // mandar las questions
+    // mandar las responses
   },
   {
     timestamps: true,
