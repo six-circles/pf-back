@@ -1,14 +1,14 @@
 const Product = require("../../models/Product");
 
 const updateProducts = async (req, res) => {
-  const { id } = req.params;
+  const { productID } = req.params;
   const { description, stock, price } = req.body;
 
   try {
     if (!description || !stock || !price) {
       throw Error("Faltan datos");
     }
-    const putProducts = await Product.findByIdAndUpdate(id, {
+    const putProducts = await Product.findByIdAndUpdate(productID, {
       price: price,
       description: description,
       stock: stock,

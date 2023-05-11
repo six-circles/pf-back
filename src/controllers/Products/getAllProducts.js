@@ -1,6 +1,6 @@
 const Product = require("../../models/Product");
 
-const getProducts = async (req, res) => {
+const getAllProducts = async (req, res) => {
   try {
     const products = await Product.find().populate("comments", {
       products: 0,
@@ -12,4 +12,4 @@ const getProducts = async (req, res) => {
     res.status(404).json({ error: error.message });
   }
 };
-module.exports = getProducts;
+module.exports = getAllProducts;
