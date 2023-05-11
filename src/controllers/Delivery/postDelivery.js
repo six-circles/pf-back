@@ -1,19 +1,15 @@
 const Delivery = require("../../models/Delivery");
 const postDelivery = async (req, res) => {
-  const { type, status, weigth } = req.body;
+  const { type, status, weight } = req.body;
   try {
-    if (!name || !email || !phone || !password || !birthday)
-      throw Error("Faltan datos");
+    if (!type || !status || !weight) throw Error("Faltan datos");
 
-    const hash = await bcrypt.hash(password, 10);
-    const newUser = await User.create({
-      name: name,
-      email: email,
-      phone: phone,
-      password: hash,
-      birthday: birthday,
+    const newDelivery = await Delivery.create({
+      type: type,
+      status: status,
+      weight: weight,
     });
-    res.status(201).send({ message: "User created", user: newUser });
+    res.status(201).send({ message: "Delivery created", user: newDelivery });
   } catch (err) {
     res.status(400).send({ error: err.message });
   }
