@@ -34,6 +34,10 @@ const productSchema = new Schema(
         ref: "Comments",
       },
     ],
+    user: {
+      type: Schema.Types.ObjectId,
+      ref: "User",
+    },
     questions: [
       {
         type: Schema.Types.ObjectId,

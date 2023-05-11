@@ -1,7 +1,6 @@
 const { Schema, model } = require("mongoose");
 
 const commentsSchema = new Schema({
-  //mandar el user,
   body: {
     type: String,
     required: true,
@@ -16,6 +15,10 @@ const commentsSchema = new Schema({
       ref: "Product",
     },
   ],
+  user: {
+    type: Schema.Types.ObjectId,
+    ref: "User",
+  },
 });
 
 module.exports = model("Comments", commentsSchema);
