@@ -16,6 +16,7 @@ const getComments = async (req, res) => {
         price: 0,
         stock: 0,
         description: 0,
+        questions: 0,
       })
       .populate("user", {
         _id: 1,
