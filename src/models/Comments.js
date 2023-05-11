@@ -1,17 +1,19 @@
 const { Schema, model } = require("mongoose");
 
 const commentsSchema = new Schema({
-  comments: [
+  //mandar el user,
+  body: {
+    type: String,
+    required: true,
+  },
+  punctuation: {
+    type: Number,
+    required: true,
+  },
+  products: [
     {
-      //mandar el user,
-      body: {
-        type: String,
-        required: true,
-      },
-      punctuation: {
-        type: Number,
-        required: true,
-      },
+      type: Schema.Types.ObjectId,
+      ref: "Product",
     },
   ],
 });
