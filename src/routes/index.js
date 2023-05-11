@@ -9,6 +9,7 @@ const updateProducts = require("../controllers/Products/updateProducts");
 const postComment = require("../controllers/Comments/postComment");
 const getComments = require("../controllers/Comments/getComment");
 const deleteComment = require("../controllers/Comments/deleteComment");
+const getProductsByUser = require("../controllers/Products/getProductsByUser");
 
 const mainRouter = Router();
 
@@ -18,6 +19,7 @@ mainRouter.delete("/user/:userID", deleteUser);
 
 mainRouter.get("/product", getAllProducts);
 mainRouter.get("/product/:productID", getProductsById);
+mainRouter.get("/:userID/product", getProductsByUser);
 mainRouter.post("/product", postProduct);
 mainRouter.patch("/product/:productID", updateProducts);
 
