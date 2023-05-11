@@ -18,6 +18,10 @@ const getUserById = require("../controllers/Users/getUserById");
 const deleteAnswers = require("../controllers/QA/deleteA");
 const getAnswers = require("../controllers/QA/getA");
 const postAnswers = require("../controllers/QA/postA");
+const postDelivery = require("../controllers/Delivery/postDelivery");
+const getDeliveryById = require("../controllers/Delivery/getDeliveryById");
+const updateDelivery = require("../controllers/Delivery/updateDelivery");
+const deleteDelivery = require("../controllers/Delivery/deleteDelivery");
 
 const mainRouter = Router();
 
@@ -44,5 +48,10 @@ mainRouter.delete("/product/questions/:id", deleteQuestions);
 mainRouter.get("/product/questions/answers/:id", getAnswers);
 mainRouter.post("/product/questions/answers", postAnswers);
 mainRouter.delete("/product/questions/answers/:id", deleteAnswers);
+
+mainRouter.get("/delivery/:id", getDeliveryById);
+mainRouter.post("/delivery", postDelivery);
+mainRouter.patch("/delivery/:id", updateDelivery);
+mainRouter.delete("/delivery/:id", deleteDelivery);
 
 module.exports = mainRouter;
