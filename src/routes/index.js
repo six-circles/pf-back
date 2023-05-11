@@ -37,9 +37,6 @@ mainRouter.get("/product/:productID/comments", getComments);
 mainRouter.post("/product/comments", postComment);
 mainRouter.delete("/product/comments/:commentID", deleteComment);
 
-mainRouter.post("/product/comments", postComment);
-mainRouter.get("/product/comments", getComments);
-
 mainRouter.get("/product/questions/:id", getQuestions);
 mainRouter.post("/product/questions", postQuestions);
 mainRouter.delete("/product/questions/:id", deleteQuestions);
