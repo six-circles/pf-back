@@ -5,9 +5,6 @@ const updateProducts = async (req, res) => {
   const { description, stock, price } = req.body;
 
   try {
-    if (!description || !stock || !price) {
-      throw Error("Faltan datos");
-    }
     const putProducts = await Product.findByIdAndUpdate(productID, {
       price: price,
       description: description,
