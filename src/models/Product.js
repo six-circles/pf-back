@@ -34,9 +34,12 @@ const productSchema = new Schema(
         ref: "Comments",
       },
     ],
-    // mandar los comments
-    // mandar las questions
-    // mandar las responses
+    questions: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "Questions",
+      },
+    ],
   },
   {
     timestamps: true,

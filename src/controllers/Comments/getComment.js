@@ -10,6 +10,7 @@ const getComments = async (req, res) => {
       price: 0,
       stock: 0,
       description: 0,
+      questions: 0,
     });
     res.status(200).json(comments);
   } catch (error) {
