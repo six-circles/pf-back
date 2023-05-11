@@ -13,7 +13,6 @@ const updateProducts = async (req, res) => {
       description: description,
       stock: stock,
     });
-    console.log(putProducts);
     res.status(200).json("Producto modificado");
   } catch (error) {
     res.status(404).json({ error: error.message });
