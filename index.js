@@ -1,6 +1,6 @@
 const app = require("./src/app");
 const mongoose = require("mongoose");
-const Product = require("./src/models/Product");
+
 // require("dotenv").config();
 // const { DB_CONNECTION } = require(process.env);
 

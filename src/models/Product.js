@@ -28,6 +28,12 @@ const productSchema = new Schema(
     sales: {
       type: Number,
     },
+    comments: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "Comments",
+      },
+    ],
     // mandar los comments
     // mandar las questions
     // mandar las responses
