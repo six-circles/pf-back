@@ -13,6 +13,11 @@ const getProductsByUser = async (req, res) => {
         _id: 0,
         name: 1,
         email: 1,
+      })
+      .populate("questions", {
+        products: 0,
+        __v: 0,
+        _id: 0,
       });
     res.status(200).json(products);
   } catch (error) {
