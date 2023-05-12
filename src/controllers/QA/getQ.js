@@ -24,7 +24,7 @@ const getQuestions = async (req, res) => {
         __v: 0,
       })
       .populate("answer", {
-        quesiton: 0,
+        question: 0,
       });
     res.status(200).json(questions);
   } catch (err) {
