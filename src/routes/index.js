@@ -15,6 +15,7 @@ const postQuestions = require("../controllers/QA/postQ");
 const deleteQuestions = require("../controllers/QA/deleteQ");
 const getUsers = require("../controllers/Users/getUsers");
 const getUserById = require("../controllers/Users/getUserById");
+const getUserByEmail = require("../controllers/Users/getUserByEmail");
 const deleteAnswers = require("../controllers/QA/deleteA");
 const getAnswers = require("../controllers/QA/getA");
 const postAnswers = require("../controllers/QA/postA");
@@ -22,11 +23,13 @@ const postDelivery = require("../controllers/Delivery/postDelivery");
 const getDeliveryById = require("../controllers/Delivery/getDeliveryById");
 const updateDelivery = require("../controllers/Delivery/updateDelivery");
 const deleteDelivery = require("../controllers/Delivery/deleteDelivery");
+const passport = require("passport");
 
 const mainRouter = Router();
 
-mainRouter.get("/user", getUsers);
+mainRouter.get("/users", getUsers);
 mainRouter.get("/user/:id", getUserById);
+mainRouter.get("/user", getUserByEmail);
 mainRouter.post("/user", postUser);
 mainRouter.patch("/user/:userID", updateUser);
 mainRouter.delete("/user/:userID", deleteUser);
