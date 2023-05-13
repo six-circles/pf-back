@@ -4,18 +4,16 @@ const bcrypt = require("bcrypt");
 const login = async (req, response, next) => {
   const { email, password } = req.body;
   try {
-    const localStorage = [];
     const user = await User.findOne({ email: email });
 
     if (user) {
       const match = await bcrypt.compare(password, user.password);
       if (match) {
-        localStorage.push(email);
-        localStorage.push(password);
-        console.log(localStorage);
-        response.status(202).send("Login successful");
+        response.status(202).send({
+          id: user._id,
+        });
       } else {
-        response.status(404).send("Passwords do not match");
+        response.status(401).send("Passwords do not match");
       }
     } else {
       response.status(404).send("User not found");

@@ -1,21 +1,11 @@
 const User = require("../../models/User");
-const bcrypt = require("bcrypt");
 
 const checkLogin = async (req, response, next) => {
+  const { _id } = req.headers;
   try {
-    const localStorage = [];
-    const user = await User.findOne({ email: localStorage.email });
-
+    const user = await User.findOne({ _id: _id });
     if (user) {
-      const match = await bcrypt.compare(localStorage.password, user.password);
-      if (match) {
-        localStorage.push(email);
-        localStorage.push(password);
-        console.log(localStorage);
-        next();
-      } else {
-        response.status(404).send("You need to be logged in");
-      }
+      next();
     } else {
       response.status(404).send("You need to be logged in");
     }
