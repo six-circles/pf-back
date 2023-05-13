@@ -10,10 +10,10 @@ const postProduct = async (req, res) => {
     const user = await User.findById(userId);
     const newProduct = await Product.create({
       title: title,
-      price: price,
       image: image,
       description: description,
       stock: stock,
+      price: price,
       user: user._id,
     });
     res.status(201).json({ message: "Product created", user: newProduct });
