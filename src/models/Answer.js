@@ -4,10 +4,10 @@ const answerSchema = new Schema({
     type: "string",
     required: true,
   },
-  quesiton: [
+  question: [
     {
       type: Schema.Types.ObjectId,
-      ref: "question",
+      ref: "Questions",
     },
   ],
 });

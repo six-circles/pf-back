@@ -2,9 +2,17 @@ const Product = require("../../models/Product");
 const User = require("../../models/User");
 
 const postProduct = async (req, res) => {
-  const { title, image, description, stock, price, userId } = req.body;
+  const { title, image, description, stock, price, userId } =
+    req.body;
   try {
-    if (!title || !image || !description || !stock || !price || !userId)
+    if (
+      !title ||
+      !image ||
+      !description ||
+      !stock ||
+      !price ||
+      !userId
+    )
       throw Error("Faltan datos");
 
     const user = await User.findById(userId);

@@ -8,6 +8,7 @@ const getAnswers = async (req, res) => {
       __v: 0,
       _id: 0,
     });
+    console.log(answer);
 
     res.status(200).json(answer);
   } catch (err) {
