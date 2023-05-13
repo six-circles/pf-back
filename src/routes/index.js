@@ -47,7 +47,7 @@ mainRouter.patch("/product/:productID", /*checkLogin ,*/ updateProducts);
 mainRouter.get("/product/:productID/comments", getComments);
 mainRouter.post("/product/comments", /*checkLogin ,*/ postComment);
 mainRouter.delete(
-  "/product/comments/:commentID",
+  "/product/:productID/comments/:commentID",
   /*checkLogin ,*/ deleteComment
 );
 
