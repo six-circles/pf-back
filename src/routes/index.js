@@ -35,7 +35,7 @@ mainRouter.patch("/product/:productID", updateProducts);
 
 mainRouter.get("/product/:productID/comments", getComments);
 mainRouter.post("/product/comments", postComment);
-mainRouter.delete("/product/comments/:commentID", deleteComment);
+mainRouter.delete("/product/:productID/comments/:commentID", deleteComment);
 
 mainRouter.get("/product/questions/:id", getQuestions);
 mainRouter.post("/product/questions", postQuestions);
