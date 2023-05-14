@@ -11,6 +11,7 @@ const login = async (req, response, next) => {
       if (match) {
         response.status(202).json({
           id: user._id,
+          user: user.name,
         });
       } else {
         response.status(401).send("Passwords do not match");
