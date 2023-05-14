@@ -9,7 +9,7 @@ const login = async (req, response, next) => {
     if (user) {
       const match = await bcrypt.compare(password, user.password);
       if (match) {
-        response.status(202).send({
+        response.status(202).json({
           id: user._id,
         });
       } else {

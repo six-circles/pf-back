@@ -2,6 +2,7 @@ const User = require("../../models/User");
 
 const checkLogin = async (req, response, next) => {
   const { _id } = req.headers;
+  console.log(req.headers);
   try {
     const user = await User.findOne({ _id: _id });
     if (user) {
