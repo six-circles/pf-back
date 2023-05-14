@@ -35,28 +35,28 @@ mainRouter.get("/users", getUsers);
 mainRouter.get("/user/:id", getUserById);
 mainRouter.get("/user", getUserByEmail);
 mainRouter.post("/user", postUser);
-mainRouter.patch("/user/:userID", /*checkLogin ,*/ updateUser);
-mainRouter.delete("/user/:userID", /*checkLogin ,*/ deleteUser);
+mainRouter.patch("/user/:userID", checkLogin, updateUser);
+mainRouter.delete("/user/:userID", checkLogin, deleteUser);
 
 mainRouter.get("/product", getAllProducts);
 mainRouter.get("/product/:productID", getProductsById);
 mainRouter.get("/:userID/product", getProductsByUser);
 mainRouter.post("/product", checkLogin, postProduct);
-mainRouter.patch("/product/:productID", /*checkLogin ,*/ updateProducts);
+mainRouter.patch("/product/:productID", checkLogin, updateProducts);
 
 mainRouter.get("/product/:productID/comments", getComments);
-mainRouter.post("/product/comments", /*checkLogin ,*/ postComment);
+mainRouter.post("/product/comments", checkLogin, postComment);
 mainRouter.delete(
   "/product/:productID/comments/:commentID",
   /*checkLogin ,*/ deleteComment
 );
 
 mainRouter.get("/product/questions/:id", getQuestions);
-mainRouter.post("/product/questions", /*checkLogin ,*/ postQuestions);
-mainRouter.delete("/product/questions/:id", /*checkLogin ,*/ deleteQuestions);
+mainRouter.post("/product/questions", checkLogin, postQuestions);
+mainRouter.delete("/product/questions/:id", checkLogin, deleteQuestions);
 
 mainRouter.get("/product/questions/answers/:id", getAnswers);
-mainRouter.post("/product/questions/answers", /*checkLogin ,*/ postAnswers);
+mainRouter.post("/product/questions/answers", checkLogin, postAnswers);
 mainRouter.delete(
   "/product/questions/answers/:id",
   /*checkLogin ,*/ deleteAnswers
