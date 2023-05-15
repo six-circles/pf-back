@@ -1,5 +1,8 @@
 const { Schema, model } = require("mongoose");
 const questionsSchema = new Schema({
+  userName: {
+    type: "string",
+  },
   product: [
     {
       type: Schema.Types.ObjectId,

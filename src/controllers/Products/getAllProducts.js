@@ -1,7 +1,7 @@
 const Product = require("../../models/Product");
 
 const getAllProducts = async (req, res) => {
-  const { title } = req.query;
+  const { title, orderPrice, orderTitle, orderPunctuations } = req.query;
   try {
     const products = await Product.find()
       .populate("comments", {
@@ -15,15 +15,26 @@ const getAllProducts = async (req, res) => {
         _id: 0,
       });
 
-    if (title) {
+    if (orderPrice) {
+      const products = await Product.find().sort({ price: orderPrice });
+      res.status(200).json(products);
+    } else if (orderTitle) {
+      const products = await Product.find().sort({ title: orderTitle });
+      res.status(200).json(products);
+    } else if (orderPunctuations) {
+      const products = await Product.find().sort({
+        punctuations: orderPunctuations,
+      });
+      res.status(200).json(products);
+    } else if (title) {
       const minusTitle = title.toLowerCase();
       const productsName = [];
-      for (let i=0; i<products.length;i++) {
+      for (let i = 0; i < products.length; i++) {
         let include = products[i].title.toLowerCase().includes(minusTitle);
         if (include) {
           productsName.push(products[i]);
         }
-      };
+      }
       productsName.length
         ? res.status(200).json(productsName)
         : res.status(404).send("Product is not found.");

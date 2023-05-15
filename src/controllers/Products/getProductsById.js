@@ -22,14 +22,18 @@ const getProductsById = async (req, res) => {
         createdAt: 0,
         updatedAt: 0,
       });
-    // console.log(products[0].comments);
     for (let i = 0; i < products[0].comments.length; i++) {
       const idUser = products[0].comments[i].user.toString();
       const user = await User.find({ _id: idUser });
       const userComment = user[0].name;
       products[0].comments[i].userName = userComment;
     }
-    console.log(products);
+    for (let i = 0; i < products[0].questions.length; i++) {
+      const idUser = products[0].questions[i].user.toString();
+      const user = await User.find({ _id: idUser });
+      const userComment = user[0].name;
+      products[0].questions[i].userName = userComment;
+    }
     res.status(200).json(products);
   } catch (error) {
     res.status(404).json({ error: error.message });
