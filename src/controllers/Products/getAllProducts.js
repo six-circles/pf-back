@@ -1,7 +1,8 @@
 const Product = require("../../models/Product");
 
 const getAllProducts = async (req, res) => {
-  const { title, orderPrice, orderTitle, orderPunctuations } = req.query;
+  const { title, orderPrice, orderTitle, orderPunctuations, index1, index2 } =
+    req.query;
   try {
     const products = await Product.find()
       .populate("comments", {
@@ -13,19 +14,63 @@ const getAllProducts = async (req, res) => {
         products: 0,
         __v: 0,
         _id: 0,
-      });
+      })
+      .skip(index1)
+      .limit(index2);
+
+    const productsPaginated = await Product.find().skip(index1).limit(index2);
+    console.log(productsPaginated);
 
     if (orderPrice) {
-      const products = await Product.find().sort({ price: orderPrice });
-      res.status(200).json(products);
+      const productsOrdered = await Product.find()
+        .sort({ price: orderPrice })
+        .populate("comments", {
+          products: 0,
+          __v: 0,
+          _id: 0,
+        })
+        .populate("questions", {
+          products: 0,
+          __v: 0,
+          _id: 0,
+        })
+        .skip(index1)
+        .limit(index2);
+      res.status(200).json(productsOrdered);
     } else if (orderTitle) {
-      const products = await Product.find().sort({ title: orderTitle });
-      res.status(200).json(products);
+      const productsOrdered = await Product.find()
+        .sort({ title: orderTitle })
+        .populate("comments", {
+          products: 0,
+          __v: 0,
+          _id: 0,
+        })
+        .populate("questions", {
+          products: 0,
+          __v: 0,
+          _id: 0,
+        })
+        .skip(index1)
+        .limit(index2);
+      res.status(200).json(productsOrdered);
     } else if (orderPunctuations) {
-      const products = await Product.find().sort({
-        punctuations: orderPunctuations,
-      });
-      res.status(200).json(products);
+      const productsOrdered = await Product.find()
+        .sort({
+          punctuations: orderPunctuations,
+        })
+        .populate("comments", {
+          products: 0,
+          __v: 0,
+          _id: 0,
+        })
+        .populate("questions", {
+          products: 0,
+          __v: 0,
+          _id: 0,
+        })
+        .skip(index1)
+        .limit(index2);
+      res.status(200).json(productsOrdered);
     } else if (title) {
       const minusTitle = title.toLowerCase();
       const productsName = [];
