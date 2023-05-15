@@ -10,13 +10,15 @@ const productSchema = new Schema(
       type: Number,
       required: true,
     },
-    image: [{
-      type: String,
-      required: true,
-    }],
+    image: [
+      {
+        type: String,
+        required: true,
+      },
+    ],
     punctuations: {
       type: Number,
-      default:0,
+      default: 0,
     },
     description: {
       type: String,
@@ -28,6 +30,10 @@ const productSchema = new Schema(
     },
     sales: {
       type: Number,
+    },
+    condition: {
+      type: String,
+      required: true,
     },
     comments: [
       {
