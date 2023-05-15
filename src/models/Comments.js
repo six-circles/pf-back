@@ -1,6 +1,9 @@
 const { Schema, model } = require("mongoose");
 
 const commentsSchema = new Schema({
+  userName: {
+    type: "string",
+  },
   body: {
     type: String,
     required: true,
