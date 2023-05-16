@@ -2,22 +2,19 @@ const Comments = require("../../models/Comments");
 const Product = require("../../models/Product");
 
 const deleteComment = async (req, res) => {
-  const { productID,commentID } = req.params;
-  let suma=0
+  const { productID, commentID } = req.params;
+  let suma = 0;
   try {
     await Comments.findByIdAndDelete(commentID);
-    const product = await Product.findById(productID)
+    const product = await Product.findById(productID);
 
-    const allComments = await Comments.find({products: {
-      _id: productID,
-    }})
+    const allComments = await Comments.find({ products: { _id: productID } });
 
-    
-    for(let i = 0;i<allComments.length;i++){
-      suma=allComments[i].punctuation + suma
+    for (let i = 0; i < allComments.length; i++) {
+      suma = allComments[i].punctuation + suma;
     }
 
-    product.punctuations= Math.floor(suma/allComments.length)
+    product.punctuations = suma / allComments.length;
 
     await product.save();
 
