@@ -55,6 +55,9 @@ const productSchema = new Schema(
       type: String,
       required: true,
     },
+    moreCharacteristics: {
+      type: Object,
+    },
   },
   {
     timestamps: true,
