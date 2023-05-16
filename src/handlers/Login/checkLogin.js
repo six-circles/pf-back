@@ -1,15 +1,20 @@
 const User = require("../../models/User");
+const jwt = require("jsonwebtoken");
 
 const checkLogin = async (req, response, next) => {
-  const { _id } = req.headers;
-  console.log(req.headers);
+  const { token } = req.headers;
+  if (!token) {
+    return response
+      .status(401)
+      .json({ error: "You need to be logged in", message: "Missing token" });
+  }
   try {
-    const user = await User.findOne({ _id: _id });
-    if (user) {
-      next();
-    } else {
-      response.status(404).send("You need to be logged in");
+    const decodedToken = jwt.verify(token, process.env.JWT_SECRET);
+    const user = await User.findOne({ _id: decodedToken.userId });
+    if (!user) {
+      return response.status(404).send("User not found");
     }
+    next();
   } catch (error) {
     response.status(500).json("You need to be logged in");
   }
