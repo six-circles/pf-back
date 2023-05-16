@@ -23,6 +23,7 @@ const postDelivery = require("../controllers/Delivery/postDelivery");
 const getDeliveryById = require("../controllers/Delivery/getDeliveryById");
 const updateDelivery = require("../controllers/Delivery/updateDelivery");
 const deleteDelivery = require("../controllers/Delivery/deleteDelivery");
+const postCategory = require("../controllers/Category.js/postCategory");
 const login = require("../handlers/Login/login");
 
 const checkLogin = require("../handlers/Login/checkLogin");
@@ -66,5 +67,7 @@ mainRouter.get("/delivery/:id", /*checkLogin ,*/ getDeliveryById);
 mainRouter.post("/delivery", /*checkLogin ,*/ postDelivery);
 mainRouter.patch("/delivery/:id", /*checkLogin ,*/ updateDelivery);
 mainRouter.delete("/delivery/:id", /*checkLogin ,*/ deleteDelivery);
+
+mainRouter.post("/category", postCategory);
 
 module.exports = mainRouter;
