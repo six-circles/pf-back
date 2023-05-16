@@ -1,7 +1,14 @@
 const Product = require("../../models/Product");
 const getAllProducts = async (req, res) => {
-  const { title, orderPrice, orderTitle, orderPunctuations, index1, index2 } =
-    req.query;
+  const {
+    title,
+    orderPrice,
+    orderTitle,
+    orderPunctuations,
+    index1,
+    index2,
+    category,
+  } = req.query;
   try {
     let query = Product.find();
 

@@ -51,6 +51,12 @@ const productSchema = new Schema(
         ref: "Questions",
       },
     ],
+    categories: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "Category",
+      },
+    ],
   },
   {
     timestamps: true,
