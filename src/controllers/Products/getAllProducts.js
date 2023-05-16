@@ -8,6 +8,10 @@ const getAllProducts = async (req, res) => {
     index1,
     index2,
     category,
+    minPrice,
+    maxPrice,
+    minRating,
+    maxRating,
   } = req.query;
   try {
     let query = Product.find();
@@ -26,6 +30,26 @@ const getAllProducts = async (req, res) => {
     }
     if (category) {
       query = query.where("categories").equals(category);
+    }
+    if (minPrice || maxPrice) {
+      const priceFilter = {};
+      if (minPrice) {
+        priceFilter.$gte = minPrice;
+      }
+      if (maxPrice) {
+        priceFilter.$lte = maxPrice;
+      }
+      query = query.where("price", priceFilter);
+    }
+    if (minRating || maxRating) {
+      const ratingFilter = {};
+      if (minRating) {
+        ratingFilter.$gte = minRating;
+      }
+      if (maxRating) {
+        ratingFilter.$lte = maxRating;
+      }
+      query = query.where("punctuations", ratingFilter);
     }
 
     const products = await query
