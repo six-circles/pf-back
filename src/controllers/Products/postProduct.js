@@ -2,8 +2,16 @@ const Product = require("../../models/Product");
 const User = require("../../models/User");
 
 const postProduct = async (req, res) => {
-  const { title, image, description, stock, price, condition, userId } =
-    req.body;
+  const {
+    title,
+    image,
+    description,
+    stock,
+    price,
+    condition,
+    userId,
+    categories,
+  } = req.body;
   try {
     if (
       !title ||
@@ -12,7 +20,8 @@ const postProduct = async (req, res) => {
       !stock ||
       !price ||
       !condition ||
-      !userId
+      !userId ||
+      !categories
     )
       throw Error("Faltan datos");
 
@@ -25,6 +34,7 @@ const postProduct = async (req, res) => {
       price: price,
       condition: condition,
       user: user._id,
+      categories: categories,
     });
     res.status(201).json({ message: "Product created", user: newProduct });
   } catch (err) {
