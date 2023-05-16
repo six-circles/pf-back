@@ -11,6 +11,7 @@ const postProduct = async (req, res) => {
     condition,
     userId,
     categories,
+    moreCharacteristics,
   } = req.body;
   try {
     if (
@@ -25,6 +26,15 @@ const postProduct = async (req, res) => {
     )
       throw Error("Faltan datos");
 
+    if (
+      categories !== "Technology" &&
+      categories !== "Furniture" &&
+      categories !== "Indumentary" &&
+      categories !== "Others"
+    ) {
+      throw Error("Invalid Category");
+    }
+
     const user = await User.findById(userId);
     const newProduct = await Product.create({
       title: title,
@@ -35,6 +45,7 @@ const postProduct = async (req, res) => {
       condition: condition,
       user: user._id,
       categories: categories,
+      moreCharacteristics: moreCharacteristics,
     });
     res.status(201).json({ message: "Product created", user: newProduct });
   } catch (err) {

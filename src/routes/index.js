@@ -41,7 +41,7 @@ mainRouter.delete("/user/:userID", checkLogin, deleteUser);
 mainRouter.get("/product", getAllProducts);
 mainRouter.get("/product/:productID", getProductsById);
 mainRouter.get("/:userID/product", getProductsByUser);
-mainRouter.post("/product", checkLogin, postProduct);
+mainRouter.post("/product", /*checkLogin,*/ postProduct);
 mainRouter.patch("/product/:productID", checkLogin, updateProducts);
 
 mainRouter.get("/product/:productID/comments", getComments);
