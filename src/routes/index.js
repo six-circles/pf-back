@@ -48,7 +48,8 @@ mainRouter.get("/product/:productID/comments", getComments);
 mainRouter.post("/product/comments", checkLogin, postComment);
 mainRouter.delete(
   "/product/:productID/comments/:commentID",
-  /*checkLogin ,*/ deleteComment
+  checkLogin,
+  deleteComment
 );
 
 mainRouter.get("/product/questions/:id", getQuestions);
