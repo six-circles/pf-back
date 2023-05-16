@@ -32,6 +32,12 @@ const userSchema = new Schema(
     totalSales: {
       type: Number,
     },
+    shoppingCart: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "Product",
+      },
+    ],
   },
   {
     timestamps: true,
