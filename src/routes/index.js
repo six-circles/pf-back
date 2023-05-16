@@ -41,14 +41,15 @@ mainRouter.delete("/user/:userID", checkLogin, deleteUser);
 mainRouter.get("/product", getAllProducts);
 mainRouter.get("/product/:productID", getProductsById);
 mainRouter.get("/:userID/product", getProductsByUser);
-mainRouter.post("/product", /* checkLogin,*/ postProduct);
+mainRouter.post("/product", checkLogin, postProduct);
 mainRouter.patch("/product/:productID", checkLogin, updateProducts);
 
 mainRouter.get("/product/:productID/comments", getComments);
 mainRouter.post("/product/comments", checkLogin, postComment);
 mainRouter.delete(
   "/product/:productID/comments/:commentID",
-  /*checkLogin ,*/ deleteComment
+  checkLogin,
+  deleteComment
 );
 
 mainRouter.get("/product/questions/:id", getQuestions);
