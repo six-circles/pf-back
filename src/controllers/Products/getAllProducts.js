@@ -24,6 +24,9 @@ const getAllProducts = async (req, res) => {
     } else if (orderPunctuations) {
       query = query.sort({ punctuations: orderPunctuations });
     }
+    if (category) {
+      query = query.where("categories").equals(category);
+    }
 
     const products = await query
       .populate("comments", { products: 0, __v: 0, _id: 0 })
