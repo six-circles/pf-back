@@ -1,15 +1,19 @@
 const Comments = require("../../models/Comments");
 const Product = require("../../models/Product");
 const User = require("../../models/User");
+const jwt = require("jsonwebtoken");
 
 const postComment = async (req, res) => {
-  const { body, punctuation, productsId, userId } = req.body;
+  const { body, punctuation, productsId, token } = req.body;
   let suma = 0;
   try {
-    if (!body || !punctuation || !productsId || !userId) {
+    if (!body || !punctuation || !productsId || !token) {
       throw Error("Faltan datos");
     }
-    const user = await User.findById(userId);
+    const userId = jwt.verify(token, process.env.SECRET_KEY_JWT);
+    if (!userId) throw Error("No estas logueado");
+    const user = await User.findById(userId.userId);
+
     const product = await Product.findById(productsId);
 
     const newComment = await Comments.create({

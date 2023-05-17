@@ -39,6 +39,7 @@ const postProduct = async (req, res) => {
     const userId = jwt.verify(token, process.env.SECRET_KEY_JWT);
 
     const user = await User.findById(userId.userId);
+
     const newProduct = await Product.create({
       title: title,
       image: image,
