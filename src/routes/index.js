@@ -30,6 +30,8 @@ const deleteSC = require("../controllers/ShoppingCart/deleteSC");
 const login = require("../handlers/Login/login");
 const googleLogin = require("../handlers/Login/googleLogin");
 const goToGoogle = require("../handlers/Login/goToGoogle");
+const goToFacebook = require("../handlers/Login/goToFacebook");
+const facebookLogin = require("../handlers/Login/facebookLogin");
 
 const checkLogin = require("../handlers/Login/checkLogin");
 
@@ -79,7 +81,8 @@ mainRouter.post("/user/shoppingCart", postSC);
 mainRouter.delete("/:userID/shoppingCart/:productID", deleteSC);
 
 mainRouter.get("/auth/google", goToGoogle);
-
 mainRouter.get("/auth/google/callback", googleLogin);
+mainRouter.get("/auth/facebook", goToFacebook);
+mainRouter.get("/auth/facebook/callback", facebookLogin);
 
 module.exports = mainRouter;
