@@ -42,8 +42,6 @@ const facebookLogin = async (req, res) => {
       });
     }
   } catch (error) {
-    // Manejo de errores
-    console.error(error);
     res.status(500).send("Error en la autenticación con Facebook");
   }
 };
