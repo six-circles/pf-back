@@ -43,7 +43,7 @@ const postProduct = async (req, res) => {
       stock: stock,
       price: price,
       condition: condition,
-      user: user._id,
+      user: user.token,
       categories: categories,
       moreCharacteristics: moreCharacteristics,
     });

@@ -3,6 +3,7 @@ const jwt = require("jsonwebtoken");
 
 const checkLogin = async (req, response, next) => {
   const { token } = req.headers;
+  console.log(token);
   if (!token) {
     return response
       .status(401)
