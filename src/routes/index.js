@@ -1,4 +1,5 @@
 const { Router } = require("express");
+
 const postUser = require("../controllers/Users/postUsers");
 const updateUser = require("../controllers/Users/updateUser");
 const deleteUser = require("../controllers/Users/deleteUser");
@@ -27,6 +28,8 @@ const postSC = require("../controllers/ShoppingCart/postSC");
 const getSC = require("../controllers/ShoppingCart/getSC");
 const deleteSC = require("../controllers/ShoppingCart/deleteSC");
 const login = require("../handlers/Login/login");
+const googleLogin = require("../handlers/Login/googleLogin");
+const goToGoogle = require("../handlers/Login/goToGoogle");
 
 const checkLogin = require("../handlers/Login/checkLogin");
 
@@ -74,5 +77,9 @@ mainRouter.delete("/delivery/:id", /*checkLogin ,*/ deleteDelivery);
 mainRouter.get("/:userID/shoppingCart", getSC);
 mainRouter.post("/user/shoppingCart", postSC);
 mainRouter.delete("/:userID/shoppingCart/:productID", deleteSC);
+
+mainRouter.get("/auth/google", goToGoogle);
+
+mainRouter.get("/auth/google/callback", googleLogin);
 
 module.exports = mainRouter;
