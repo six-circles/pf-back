@@ -51,7 +51,7 @@ const productSchema = new Schema(
         ref: "Questions",
       },
     ],
-    categories: {
+    category: {
       type: String,
       required: true,
     },

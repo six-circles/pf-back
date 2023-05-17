@@ -23,6 +23,9 @@ const postDelivery = require("../controllers/Delivery/postDelivery");
 const getDeliveryById = require("../controllers/Delivery/getDeliveryById");
 const updateDelivery = require("../controllers/Delivery/updateDelivery");
 const deleteDelivery = require("../controllers/Delivery/deleteDelivery");
+const postSC = require("../controllers/ShoppingCart/postSC");
+const getSC = require("../controllers/ShoppingCart/getSC");
+const deleteSC = require("../controllers/ShoppingCart/deleteSC");
 const login = require("../handlers/Login/login");
 
 const checkLogin = require("../handlers/Login/checkLogin");
@@ -40,7 +43,7 @@ mainRouter.delete("/user/:userID", checkLogin, deleteUser);
 
 mainRouter.get("/product", getAllProducts);
 mainRouter.get("/product/:productID", getProductsById);
-mainRouter.get("/:userID/product", getProductsByUser);
+mainRouter.get("/:token/product", getProductsByUser);
 mainRouter.post("/product", checkLogin, postProduct);
 mainRouter.patch("/product/:productID", checkLogin, updateProducts);
 
@@ -48,7 +51,8 @@ mainRouter.get("/product/:productID/comments", getComments);
 mainRouter.post("/product/comments", checkLogin, postComment);
 mainRouter.delete(
   "/product/:productID/comments/:commentID",
-  /*checkLogin ,*/ deleteComment
+  checkLogin,
+  deleteComment
 );
 
 mainRouter.get("/product/questions/:id", getQuestions);
@@ -66,5 +70,9 @@ mainRouter.get("/delivery/:id", /*checkLogin ,*/ getDeliveryById);
 mainRouter.post("/delivery", /*checkLogin ,*/ postDelivery);
 mainRouter.patch("/delivery/:id", /*checkLogin ,*/ updateDelivery);
 mainRouter.delete("/delivery/:id", /*checkLogin ,*/ deleteDelivery);
+
+mainRouter.get("/:userID/shoppingCart", getSC);
+mainRouter.post("/user/shoppingCart", postSC);
+mainRouter.delete("/:userID/shoppingCart/:productID", deleteSC);
 
 module.exports = mainRouter;

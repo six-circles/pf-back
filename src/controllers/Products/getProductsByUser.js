@@ -1,9 +1,16 @@
 const Product = require("../../models/Product");
+const User = require("../../models/User");
+const jwt = require("jsonwebtoken");
 
 const getProductsByUser = async (req, res) => {
-  const { userID } = req.params;
+  const { token } = req.params;
+
   try {
-    const products = await Product.find({ user: userID })
+    const userId = jwt.verify(token, process.env.SECRET_KEY_JWT);
+    if (!userId) throw Error("No estas logueado");
+    const user = await User.findById(userId.userId);
+
+    const products = await Product.find({ user: user })
       .populate("comments", {
         products: 0,
         __v: 0,
