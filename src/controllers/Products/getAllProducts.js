@@ -29,7 +29,7 @@ const getAllProducts = async (req, res) => {
       query = query.sort({ punctuations: orderPunctuations });
     }
     if (category) {
-      query = query.where("categories").equals(category);
+      query = query.where("category").equals(category);
     }
     if (minPrice || maxPrice) {
       const priceFilter = {};
