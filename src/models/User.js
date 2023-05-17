@@ -16,15 +16,12 @@ const userSchema = new Schema(
     },
     phone: {
       type: Number,
-      required: true,
     },
     password: {
       type: String,
-      required: true,
     },
     birthday: {
       type: String,
-      required: true,
     },
     punctuation: {
       type: Number,
