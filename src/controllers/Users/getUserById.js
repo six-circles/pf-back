@@ -1,11 +1,15 @@
 const User = require("../../models/User");
 
 const getUserById = async (req, res) => {
-  const { id } = req.params;
+  const { token } = req.params;
   try {
-    const user = await User.findById(id);
+    const userId = jwt.verify(token, process.env.SECRET_KEY_JWT);
+    if (!userId) throw Error("No estas logueado");
+    const user = await User.findById(userId.userId);
 
-    res.status(200).json(user);
+    const userProfile = await User.findById(user._id);
+
+    res.status(200).json(userProfile);
   } catch (error) {
     res.status(404).json({ error: error.message });
   }
