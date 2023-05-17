@@ -1,5 +1,6 @@
 const Product = require("../../models/Product");
 const User = require("../../models/User");
+const jwt = require("jsonwebtoken");
 
 const postProduct = async (req, res) => {
   const {
@@ -9,8 +10,8 @@ const postProduct = async (req, res) => {
     stock,
     price,
     condition,
-    userId,
-    categories,
+    token,
+    category,
     moreCharacteristics,
   } = req.body;
   try {
@@ -21,21 +22,24 @@ const postProduct = async (req, res) => {
       !stock ||
       !price ||
       !condition ||
-      !userId ||
-      !categories
+      !token ||
+      !category
     )
       throw Error("Faltan datos");
 
     if (
-      categories !== "Technology" &&
-      categories !== "Furniture" &&
-      categories !== "Indumentary" &&
-      categories !== "Others"
+      category !== "Technology" &&
+      category !== "Furniture" &&
+      category !== "Indumentary" &&
+      category !== "Others"
     ) {
       throw Error("Invalid Category");
     }
 
-    const user = await User.findById(userId);
+    const userId = jwt.verify(token, process.env.SECRET_KEY_JWT);
+
+    const user = await User.findById(userId.userId);
+
     const newProduct = await Product.create({
       title: title,
       image: image,
@@ -43,8 +47,13 @@ const postProduct = async (req, res) => {
       stock: stock,
       price: price,
       condition: condition,
+<<<<<<< HEAD
       user: user.token,
       categories: categories,
+=======
+      user: user._id,
+      category: category,
+>>>>>>> f308f42ff5902e46c1b82d3238b1c4e62cb885c2
       moreCharacteristics: moreCharacteristics,
     });
     res.status(201).json({ message: "Product created", user: newProduct });

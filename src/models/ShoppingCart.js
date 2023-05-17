@@ -13,4 +13,4 @@ const shoppingCartSchema = new Schema({
   ],
 });
 
-module.exports = model("ShoppingCart", commentsSchema);
+module.exports = model("ShoppingCart", shoppingCartSchema);
