@@ -12,14 +12,21 @@ const updateUser = async (req, res) => {
 
     if (password) {
       const hash = await bcrypt.hash(password, 10);
+      await User.findByIdAndUpdate(user._id, {
+        name: name,
+        email: email,
+        phone: phone,
+        password: hash,
+        birthday: birthday,
+      });
+    } else {
+      await User.findByIdAndUpdate(user._id, {
+        name: name,
+        email: email,
+        phone: phone,
+        birthday: birthday,
+      });
     }
-    await User.findByIdAndUpdate(user._id, {
-      name: name,
-      email: email,
-      phone: phone,
-      password: hash,
-      birthday: birthday,
-    });
     res.status(201).send({ message: "User updated" });
   } catch (err) {
     res.status(400).send({ error: err.message });
