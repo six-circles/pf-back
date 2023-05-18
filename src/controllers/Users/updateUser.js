@@ -1,4 +1,5 @@
 const User = require("../../models/User");
+const jwt = require("jsonwebtoken");
 
 const updateUser = async (req, res) => {
   const { token } = req.params;
