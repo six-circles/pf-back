@@ -2,13 +2,14 @@ const Product = require("../../models/Product");
 
 const updateProducts = async (req, res) => {
   const { productID } = req.params;
-  const { description, stock, price } = req.body;
+  const { description, stock, price, enable } = req.body;
 
   try {
     const putProducts = await Product.findByIdAndUpdate(productID, {
       price: price,
       description: description,
       stock: stock,
+      enable: enable,
     });
     res.status(200).json("Producto modificado");
   } catch (error) {
