@@ -1,5 +1,6 @@
 const User = require("../../models/User");
 const jwt = require("jsonwebtoken");
+const bcrypt = require("bcrypt");
 
 const updateUser = async (req, res) => {
   const { token } = req.params;
@@ -18,7 +19,7 @@ const updateUser = async (req, res) => {
       birthday: birthday,
     });
     res.status(201).send({ message: "User updated" });
-  } catch (error) {
+  } catch (err) {
     res.status(400).send({ error: err.message });
   }
 };

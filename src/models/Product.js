@@ -58,6 +58,10 @@ const productSchema = new Schema(
     moreCharacteristics: {
       type: Object,
     },
+    enable: {
+      type: Boolean,
+      default: true,
+    },
   },
   {
     timestamps: true,

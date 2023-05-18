@@ -1,3 +1,4 @@
+const sendMail = require("../../Email/sendEmail");
 const User = require("../../models/User");
 const bcrypt = require("bcrypt");
 
@@ -15,6 +16,9 @@ const postUser = async (req, res) => {
       password: hash,
       birthday: birthday,
     });
+
+    await sendMail(newUser.email, "User created", "Welcome to SixCircle");
+
     res.status(201).send({ message: "User created", user: newUser });
   } catch (err) {
     res.status(400).send({ error: err.message });

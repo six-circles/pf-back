@@ -50,7 +50,7 @@ mainRouter.get("/product", getAllProducts);
 mainRouter.get("/product/:productID", getProductsById);
 mainRouter.get("/:token/product", getProductsByUser);
 mainRouter.post("/product", checkLogin, postProduct);
-mainRouter.patch("/product/:productID", checkLogin, updateProducts);
+mainRouter.patch("/product/:productID" /*, checkLogin*/, updateProducts);
 
 mainRouter.get("/product/:productID/comments", getComments);
 mainRouter.post("/product/comments", checkLogin, postComment);

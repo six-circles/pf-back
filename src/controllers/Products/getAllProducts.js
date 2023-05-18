@@ -58,8 +58,15 @@ const getAllProducts = async (req, res) => {
       .skip(index1)
       .limit(index2);
 
-    if (products.length) {
-      res.status(200).json(products);
+    const productsEnabled = [];
+    products.forEach((element) => {
+      if (element.enable === true) {
+        productsEnabled.push(element);
+      }
+    });
+
+    if (productsEnabled.length) {
+      res.status(200).json(productsEnabled);
     } else {
       res.status(404).send("Product is not found.");
     }
