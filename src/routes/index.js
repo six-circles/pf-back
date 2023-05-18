@@ -32,6 +32,7 @@ const googleLogin = require("../handlers/Login/googleLogin");
 const goToGoogle = require("../handlers/Login/goToGoogle");
 const goToFacebook = require("../handlers/Login/goToFacebook");
 const facebookLogin = require("../handlers/Login/facebookLogin");
+const getProductsByUserId = require("../controllers/Products/getProductsByUserId");
 
 const checkLogin = require("../handlers/Login/checkLogin");
 
@@ -51,6 +52,7 @@ mainRouter.get("/product/:productID", getProductsById);
 mainRouter.get("/:token/product", getProductsByUser);
 mainRouter.post("/product", checkLogin, postProduct);
 mainRouter.patch("/product/:productID" /*, checkLogin*/, updateProducts);
+mainRouter.get("/product/moreproducts/:id", getProductsByUserId);
 
 mainRouter.get("/product/:productID/comments", getComments);
 mainRouter.post("/product/comments", checkLogin, postComment);
