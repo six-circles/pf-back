@@ -1,8 +1,9 @@
 const User = require("../../models/User");
+const jwt = require("jsonwebtoken");
 
 const updateUser = async (req, res) => {
   const { token } = req.params;
-  const { name, email, phone, password } = req.body;
+  const { name, email, phone, password, birthday } = req.body;
   try {
     const userId = jwt.verify(token, process.env.SECRET_KEY_JWT);
     if (!userId) throw Error("No estas logueado");
@@ -14,6 +15,7 @@ const updateUser = async (req, res) => {
       email: email,
       phone: phone,
       password: hash,
+      birthday: birthday,
     });
     res.status(201).send({ message: "User updated" });
   } catch (error) {

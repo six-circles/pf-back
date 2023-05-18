@@ -1,4 +1,5 @@
 const { Router } = require("express");
+
 const postUser = require("../controllers/Users/postUsers");
 const updateUser = require("../controllers/Users/updateUser");
 const deleteUser = require("../controllers/Users/deleteUser");
@@ -27,6 +28,10 @@ const postSC = require("../controllers/ShoppingCart/postSC");
 const getSC = require("../controllers/ShoppingCart/getSC");
 const deleteSC = require("../controllers/ShoppingCart/deleteSC");
 const login = require("../handlers/Login/login");
+const googleLogin = require("../handlers/Login/googleLogin");
+const goToGoogle = require("../handlers/Login/goToGoogle");
+const goToFacebook = require("../handlers/Login/goToFacebook");
+const facebookLogin = require("../handlers/Login/facebookLogin");
 
 const checkLogin = require("../handlers/Login/checkLogin");
 
@@ -35,11 +40,11 @@ const mainRouter = Router();
 mainRouter.use("/login", login);
 
 mainRouter.get("/users", getUsers);
-mainRouter.get("/user/:id", getUserById);
+mainRouter.get("/user/:token", getUserById);
 mainRouter.get("/user", getUserByEmail);
 mainRouter.post("/user", postUser);
-mainRouter.patch("/user/:userID", checkLogin, updateUser);
-mainRouter.delete("/user/:userID", checkLogin, deleteUser);
+mainRouter.patch("/user/:token", checkLogin, updateUser);
+mainRouter.delete("/user/:token", checkLogin, deleteUser);
 
 mainRouter.get("/product", getAllProducts);
 mainRouter.get("/product/:productID", getProductsById);
@@ -74,5 +79,10 @@ mainRouter.delete("/delivery/:id", /*checkLogin ,*/ deleteDelivery);
 mainRouter.get("/:userID/shoppingCart", getSC);
 mainRouter.post("/user/shoppingCart", postSC);
 mainRouter.delete("/:userID/shoppingCart/:productID", deleteSC);
+
+mainRouter.get("/auth/google", goToGoogle);
+mainRouter.get("/auth/google/callback", googleLogin);
+mainRouter.get("/auth/facebook", goToFacebook);
+mainRouter.get("/auth/facebook/callback", facebookLogin);
 
 module.exports = mainRouter;
