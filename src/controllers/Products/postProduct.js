@@ -47,13 +47,8 @@ const postProduct = async (req, res) => {
       stock: stock,
       price: price,
       condition: condition,
-<<<<<<< HEAD
-      user: user.token,
-      categories: categories,
-=======
       user: user._id,
       category: category,
->>>>>>> f308f42ff5902e46c1b82d3238b1c4e62cb885c2
       moreCharacteristics: moreCharacteristics,
     });
     res.status(201).json({ message: "Product created", user: newProduct });
