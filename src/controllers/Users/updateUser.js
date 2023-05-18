@@ -10,7 +10,9 @@ const updateUser = async (req, res) => {
     if (!userId) throw Error("No estas logueado");
     const user = await User.findById(userId.userId);
 
-    const hash = await bcrypt.hash(password, 10);
+    if (password) {
+      const hash = await bcrypt.hash(password, 10);
+    }
     await User.findByIdAndUpdate(user._id, {
       name: name,
       email: email,
