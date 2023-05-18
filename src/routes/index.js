@@ -40,11 +40,11 @@ const mainRouter = Router();
 mainRouter.use("/login", login);
 
 mainRouter.get("/users", getUsers);
-mainRouter.get("/user/:id", getUserById);
+mainRouter.get("/user/:token", getUserById);
 mainRouter.get("/user", getUserByEmail);
 mainRouter.post("/user", postUser);
-mainRouter.patch("/user/:userID", checkLogin, updateUser);
-mainRouter.delete("/user/:userID", checkLogin, deleteUser);
+mainRouter.patch("/user/:token", checkLogin, updateUser);
+mainRouter.delete("/user/:token", checkLogin, deleteUser);
 
 mainRouter.get("/product", getAllProducts);
 mainRouter.get("/product/:productID", getProductsById);
