@@ -5,8 +5,7 @@ const getAllProducts = async (req, res) => {
     orderPrice,
     orderTitle,
     orderPunctuations,
-    index1,
-    index2,
+    index,
     category,
     minPrice,
     maxPrice,
@@ -55,8 +54,8 @@ const getAllProducts = async (req, res) => {
     const products = await query
       .populate("comments", { products: 0, __v: 0, _id: 0 })
       .populate("questions", { products: 0, __v: 0, _id: 0 })
-      .skip(index1)
-      .limit(index2);
+      .skip(index)
+      .limit(12);
 
     const productsEnabled = [];
     products.forEach((element) => {
@@ -66,7 +65,9 @@ const getAllProducts = async (req, res) => {
     });
 
     if (productsEnabled.length) {
-      res.status(200).json(productsEnabled);
+      res
+        .status(200)
+        .json({ products: productsEnabled, cantidad: productsEnabled.length });
     } else {
       res.status(404).send("Product is not found.");
     }
