@@ -1,9 +1,13 @@
 const User = require("../../models/User");
+const jwt = require("jsonwebtoken");
 
 const getSC = async (req, res) => {
-  const { userID } = req.params;
+  const { token } = req.params;
   try {
-    const user = await User.findById(userID).populate("shoppingCart", {
+    const userId = jwt.verify(token, process.env.SECRET_KEY_JWT);
+    if (!userId) throw Error("No estas logueado");
+
+    const user = await User.findById(userId).populate("shoppingCart", {
       title: 1,
       image: 1,
       punctuations: 1,
