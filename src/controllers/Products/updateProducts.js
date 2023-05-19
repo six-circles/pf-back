@@ -3,6 +3,7 @@ const Product = require("../../models/Product");
 const updateProducts = async (req, res) => {
   const { productID } = req.params;
   const { description, stock, price, enable, title } = req.body;
+  console.log(req.body);
 
   try {
     const putProducts = await Product.findByIdAndUpdate(productID, {
