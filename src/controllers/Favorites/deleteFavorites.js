@@ -7,7 +7,7 @@ const deleteFavorites = async (req, res) => {
     const userId = jwt.verify(token, process.env.SECRET_KEY_JWT);
     if (!userId) throw Error("No estas logueado");
 
-    await User.findByIdAndUpdate(userId, {
+    await User.findByIdAndUpdate(userId.userId, {
       $pull: { favorites: productID },
     });
 

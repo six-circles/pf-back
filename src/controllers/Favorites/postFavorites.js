@@ -11,7 +11,7 @@ const postFavorites = async (req, res) => {
     const userId = jwt.verify(token, process.env.SECRET_KEY_JWT);
     if (!userId) throw Error("No estas logueado");
 
-    const user = await User.findById(userId);
+    const user = await User.findById(userId.userId);
     const product = await Product.findById(productsId);
 
     user.favorites = user.favorites.concat(product._id);
