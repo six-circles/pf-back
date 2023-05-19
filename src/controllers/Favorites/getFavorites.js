@@ -7,7 +7,7 @@ const getFavorites = async (req, res) => {
     const userId = jwt.verify(token, process.env.SECRET_KEY_JWT);
     if (!userId) throw Error("No estas logueado");
 
-    const user = await User.findById(userId).populate("favorites", {
+    const user = await User.findById(userId.userId).populate("favorites", {
       title: 1,
       image: 1,
       punctuations: 1,
