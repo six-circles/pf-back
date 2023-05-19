@@ -33,6 +33,7 @@ const goToGoogle = require("../handlers/Login/goToGoogle");
 const goToFacebook = require("../handlers/Login/goToFacebook");
 const facebookLogin = require("../handlers/Login/facebookLogin");
 const getProductsByUserId = require("../controllers/Products/getProductsByUserId");
+const getCommentsByUser = require("../controllers/Comments/getCommentsByUser");
 
 const checkLogin = require("../handlers/Login/checkLogin");
 
@@ -61,6 +62,7 @@ mainRouter.delete(
   checkLogin,
   deleteComment
 );
+mainRouter.get("/product/comments/:token", /*checkLogin,*/ getCommentsByUser);
 
 mainRouter.get("/product/questions/:id", getQuestions);
 mainRouter.post("/product/questions", checkLogin, postQuestions);
