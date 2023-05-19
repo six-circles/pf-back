@@ -12,8 +12,8 @@ const productSchema = new Schema(
     },
     image: [
       {
-        type: String,
-        required: true,
+        public_id: String,
+        secure_url: String,
       },
     ],
     punctuations: {

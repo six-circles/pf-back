@@ -1,6 +1,8 @@
+const { uploadImage } = require("../../config/cloudinary");
 const Product = require("../../models/Product");
 const User = require("../../models/User");
 const jwt = require("jsonwebtoken");
+const fs = require("fs-extra");
 
 const postProduct = async (req, res) => {
   const {
@@ -42,7 +44,6 @@ const postProduct = async (req, res) => {
 
     const newProduct = await Product.create({
       title: title,
-      image: image,
       description: description,
       stock: stock,
       price: price,
@@ -51,6 +52,17 @@ const postProduct = async (req, res) => {
       category: category,
       moreCharacteristics: moreCharacteristics,
     });
+
+    if (req.files?.image) {
+      const result = await uploadImage(req.files.image.tempFile.Path);
+      newProduct.image = {
+        public_id: result.public_id,
+        secure_url: result.secure_url,
+      };
+      console.log(result);
+      await fs.unlink(req.files.image.tempFile.Path);
+    }
+
     res.status(201).json({ message: "Product created", user: newProduct });
   } catch (err) {
     res.status(400).json({ error: err.message });
