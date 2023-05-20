@@ -14,7 +14,7 @@ const getAllProducts = async (req, res) => {
     let query = Product.find();
 
     if (search) {
-      const minusTitle = title.toLowerCase();
+      const minusTitle = search.toLowerCase();
       query = query.where("title").regex(new RegExp(minusTitle, "i"));
     }
 
