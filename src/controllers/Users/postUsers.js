@@ -1,5 +1,4 @@
-
-const sendMail = require("../../Email/sendEmail");
+const sendMail = require("../../email/sendEmail");
 
 const User = require("../../models/User");
 const bcrypt = require("bcrypt");
