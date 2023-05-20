@@ -2,9 +2,7 @@ const Product = require("../../models/Product");
 const getAllProducts = async (req, res) => {
   const {
     title,
-    orderPrice,
-    orderTitle,
-    orderPunctuations,
+    order,
     index,
     category,
     minPrice,
@@ -20,13 +18,22 @@ const getAllProducts = async (req, res) => {
       query = query.where("title").regex(new RegExp(minusTitle, "i"));
     }
 
-    if (orderPrice) {
-      query = query.sort({ price: orderPrice });
-    } else if (orderTitle) {
-      query = query.sort({ title: orderTitle });
-    } else if (orderPunctuations) {
-      query = query.sort({ punctuations: orderPunctuations });
+    if (order) {
+      if (order === "-price") {
+        query = query.sort({ price: -1 });
+      } else if (order === "price") {
+        query = query.sort({ price: 1 });
+      } else if (order === "-title") {
+        query = query.sort({ title: -1 });
+      } else if (order === "title") {
+        query = query.sort({ title: 1 });
+      } else if (order === "-punctuations") {
+        query = query.sort({ punctuations: -1 });
+      } else if (order === "punctuations") {
+        query = query.sort({ punctuations: 1 });
+      }
     }
+
     if (category) {
       query = query.where("category").equals(category);
     }
@@ -55,7 +62,7 @@ const getAllProducts = async (req, res) => {
       .populate("comments", { products: 0, __v: 0, _id: 0 })
       .populate("questions", { products: 0, __v: 0, _id: 0 })
       .skip(index)
-      .limit(12);
+      .limit(13);
 
     const productsEnabled = [];
     products.forEach((element) => {
