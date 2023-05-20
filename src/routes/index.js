@@ -87,7 +87,7 @@ mainRouter.delete("/delivery/:id", /*checkLogin ,*/ deleteDelivery);
 
 mainRouter.get("/:token/shoppingCart", getSC);
 mainRouter.post("/user/shoppingCart", postSC);
-mainRouter.delete("/user/shoppingCart/", deleteSC);
+mainRouter.delete("/:token/shoppingCart/:productID", deleteSC);
 
 mainRouter.get("/:token/favorites", getFavorites);
 mainRouter.post("/user/favorites", postFavorites);

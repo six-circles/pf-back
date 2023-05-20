@@ -2,7 +2,7 @@ const User = require("../../models/User");
 const jwt = require("jsonwebtoken");
 
 const deleteSC = async (req, res) => {
-  const { productID, token } = req.body;
+  const { productID, token } = req.params;
   try {
     const userId = jwt.verify(token, process.env.SECRET_KEY_JWT);
     if (!userId) throw Error("No estas logueado");
