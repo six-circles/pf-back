@@ -2,7 +2,7 @@ const Product = require("../../models/Product");
 const User = require("../../models/User");
 const jwt = require("jsonwebtoken");
 
-const postSC = async (req, res) => {
+const postFavorites = async (req, res) => {
   const { productsId, token } = req.body;
   try {
     if (!productsId || !token) {
@@ -14,13 +14,15 @@ const postSC = async (req, res) => {
     const user = await User.findById(userId.userId);
     const product = await Product.findById(productsId);
 
-    user.shoppingCart = user.shoppingCart.concat(product._id);
+    user.favorites = user.favorites.concat(product._id);
 
     await user.save();
 
-    res.status(201).json({ message: "Product added", content: user });
+    res
+      .status(201)
+      .json({ message: "Product added to favorite", content: user });
   } catch (err) {
     res.status(400).json({ error: err.message });
   }
 };
-module.exports = postSC;
+module.exports = postFavorites;
