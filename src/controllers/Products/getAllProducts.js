@@ -83,7 +83,7 @@ const getAllProducts = async (req, res) => {
       res.status(200).json({
         products: productsEnabled,
         cantidad:
-          category || minPrice || maxPrice || minRating || maxRating
+          category || minPrice || maxPrice || minRating || maxRating || search
             ? pagesFiltered
             : pages,
       });

@@ -7,5 +7,5 @@ mongoose.connect(process.env.DB_CONNECTION);
 console.log("DB connected successfully");
 
 app.listen(3001, () => {
-  console.log("listening on port 3001");
+  console.log(`listening on port ${process.env.PORT}`);
 });
