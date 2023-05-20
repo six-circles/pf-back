@@ -1,10 +1,8 @@
 const Product = require("../../models/Product");
 const getAllProducts = async (req, res) => {
   const {
-    title,
-    orderPrice,
-    orderTitle,
-    orderPunctuations,
+    search,
+    order,
     index,
     category,
     minPrice,
@@ -13,22 +11,37 @@ const getAllProducts = async (req, res) => {
     maxRating,
   } = req.query;
   try {
-    let query = Product.find();
+    let queryProducts = Product.find();
 
-    if (title) {
-      const minusTitle = title.toLowerCase();
-      query = query.where("title").regex(new RegExp(minusTitle, "i"));
+    const allProducts = await Product.find();
+
+    const pages = Math.ceil(allProducts.length / 12);
+
+    if (search) {
+      const minusTitle = search.toLowerCase();
+      queryProducts = queryProducts
+        .where("title")
+        .regex(new RegExp(minusTitle, "i"));
     }
 
-    if (orderPrice) {
-      query = query.sort({ price: orderPrice });
-    } else if (orderTitle) {
-      query = query.sort({ title: orderTitle });
-    } else if (orderPunctuations) {
-      query = query.sort({ punctuations: orderPunctuations });
+    if (order) {
+      if (order === "-price") {
+        queryProducts = queryProducts.sort({ price: -1 });
+      } else if (order === "price") {
+        queryProducts = queryProducts.sort({ price: 1 });
+      } else if (order === "-title") {
+        queryProducts = queryProducts.sort({ title: -1 });
+      } else if (order === "title") {
+        queryProducts = queryProducts.sort({ title: 1 });
+      } else if (order === "-punctuations") {
+        queryProducts = queryProducts.sort({ punctuations: -1 });
+      } else if (order === "punctuations") {
+        queryProducts = queryProducts.sort({ punctuations: 1 });
+      }
     }
+
     if (category) {
-      query = query.where("category").equals(category);
+      queryProducts = queryProducts.where("category").equals(category);
     }
     if (minPrice || maxPrice) {
       const priceFilter = {};
@@ -38,7 +51,7 @@ const getAllProducts = async (req, res) => {
       if (maxPrice) {
         priceFilter.$lte = maxPrice;
       }
-      query = query.where("price", priceFilter);
+      queryProducts = queryProducts.where("price", priceFilter);
     }
     if (minRating || maxRating) {
       const ratingFilter = {};
@@ -48,14 +61,14 @@ const getAllProducts = async (req, res) => {
       if (maxRating) {
         ratingFilter.$lte = maxRating;
       }
-      query = query.where("punctuations", ratingFilter);
+      queryProducts = queryProducts.where("punctuations", ratingFilter);
     }
 
-    const products = await query
+    const products = await queryProducts
       .populate("comments", { products: 0, __v: 0, _id: 0 })
       .populate("questions", { products: 0, __v: 0, _id: 0 })
       .skip(index)
-      .limit(12);
+      .limit(13);
 
     const productsEnabled = [];
     products.forEach((element) => {
@@ -65,9 +78,7 @@ const getAllProducts = async (req, res) => {
     });
 
     if (productsEnabled.length) {
-      res
-        .status(200)
-        .json({ products: productsEnabled, cantidad: productsEnabled.length });
+      res.status(200).json({ products: productsEnabled, cantidad: pages });
     } else {
       res.status(404).send("Product is not found.");
     }
