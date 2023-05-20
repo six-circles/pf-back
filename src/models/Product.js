@@ -62,6 +62,9 @@ const productSchema = new Schema(
       type: Boolean,
       default: true,
     },
+    cantidadCarrito: {
+      type: Number,
+    },
   },
   {
     timestamps: true,

@@ -1,11 +1,12 @@
 const Product = require("../../models/Product");
 const User = require("../../models/User");
+// const ShoppingCart = require("../../models/ShoppingCart");
 const jwt = require("jsonwebtoken");
 
 const postSC = async (req, res) => {
-  const { productsId, token } = req.body;
+  const { productsId, token, cantidad } = req.body;
   try {
-    if (!productsId || !token) {
+    if (!productsId || !token || !cantidad) {
       throw Error("Faltan datos");
     }
     const userId = jwt.verify(token, process.env.SECRET_KEY_JWT);
@@ -14,12 +15,16 @@ const postSC = async (req, res) => {
     const user = await User.findById(userId.userId);
     const product = await Product.findById(productsId);
 
-    user.shoppingCart = user.shoppingCart.concat(product._id);
-
+    for (let i = 0; i < cantidad; i++) {
+      user.shoppingCart = user.shoppingCart.concat(product._id);
+    }
     await user.save();
 
-    res.status(201).json({ message: "Product added", content: user });
+    res
+      .status(201)
+      .json({ message: `${cantidad} products added`, content: user });
   } catch (err) {
+    console.log(err);
     res.status(400).json({ error: err.message });
   }
 };
