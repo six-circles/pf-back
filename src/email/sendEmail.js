@@ -14,6 +14,7 @@ const sendMail = async (userEmail, subject, text, html) => {
     });
 
     console.log(info);
+
   } catch (error) {
     console.log(error.message);
   }
