@@ -1,7 +1,7 @@
 const Product = require("../../models/Product");
 const getAllProducts = async (req, res) => {
   const {
-    title,
+    search,
     order,
     index,
     category,
@@ -13,7 +13,7 @@ const getAllProducts = async (req, res) => {
   try {
     let query = Product.find();
 
-    if (title) {
+    if (search) {
       const minusTitle = title.toLowerCase();
       query = query.where("title").regex(new RegExp(minusTitle, "i"));
     }
