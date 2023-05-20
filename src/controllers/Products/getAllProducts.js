@@ -77,12 +77,21 @@ const getAllProducts = async (req, res) => {
       }
     });
 
+    const pagesFiltered = Math.ceil(productsEnabled.length / 12);
+
     if (productsEnabled.length) {
-      res.status(200).json({ products: productsEnabled, cantidad: pages });
+      res.status(200).json({
+        products: productsEnabled,
+        cantidad:
+          category || minPrice || maxPrice || minRating || maxRating
+            ? pagesFiltered
+            : pages,
+      });
     } else {
       res.status(404).send("Product is not found.");
     }
   } catch (error) {
+    console.log(error);
     res.status(404).json({ error: error.message });
   }
 };

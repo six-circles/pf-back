@@ -11,6 +11,7 @@ const getFavorites = async (req, res) => {
       title: 1,
       image: 1,
       punctuations: 1,
+      price: 1,
     });
 
     res.status(200).json(user.favorites);
