@@ -32,6 +32,12 @@ const googleLogin = require("../handlers/Login/googleLogin");
 const goToGoogle = require("../handlers/Login/goToGoogle");
 const goToFacebook = require("../handlers/Login/goToFacebook");
 const facebookLogin = require("../handlers/Login/facebookLogin");
+const getProductsByUserId = require("../controllers/Products/getProductsByUserId");
+const getCommentsByUser = require("../controllers/Comments/getCommentsByUser");
+const getQuestionsByUser = require("../controllers/QA/getQByUser");
+const getFavorites = require("../controllers/Favorites/getFavorites");
+const postFavorites = require("../controllers/Favorites/postFavorites");
+const deleteFavorites = require("../controllers/Favorites/deleteFavorites");
 
 const checkLogin = require("../handlers/Login/checkLogin");
 
@@ -40,17 +46,18 @@ const mainRouter = Router();
 mainRouter.use("/login", login);
 
 mainRouter.get("/users", getUsers);
-mainRouter.get("/user/:id", getUserById);
+mainRouter.get("/user/:token", getUserById);
 mainRouter.get("/user", getUserByEmail);
 mainRouter.post("/user", postUser);
-mainRouter.patch("/user/:userID", checkLogin, updateUser);
-mainRouter.delete("/user/:userID", checkLogin, deleteUser);
+mainRouter.patch("/user/:token", checkLogin, updateUser);
+mainRouter.delete("/user/:token", checkLogin, deleteUser);
 
 mainRouter.get("/product", getAllProducts);
 mainRouter.get("/product/:productID", getProductsById);
 mainRouter.get("/:token/product", getProductsByUser);
 mainRouter.post("/product", checkLogin, postProduct);
-mainRouter.patch("/product/:productID", checkLogin, updateProducts);
+mainRouter.patch("/product/:productID" /*, checkLogin*/, updateProducts);
+mainRouter.get("/product/moreproducts/:id", getProductsByUserId);
 
 mainRouter.get("/product/:productID/comments", getComments);
 mainRouter.post("/product/comments", checkLogin, postComment);
@@ -59,6 +66,7 @@ mainRouter.delete(
   checkLogin,
   deleteComment
 );
+mainRouter.get("/product/comments/:token", /*checkLogin,*/ getCommentsByUser);
 
 mainRouter.get("/product/questions/:id", getQuestions);
 mainRouter.post("/product/questions", checkLogin, postQuestions);
@@ -70,15 +78,20 @@ mainRouter.delete(
   "/product/questions/answers/:id",
   /*checkLogin ,*/ deleteAnswers
 );
+mainRouter.get("/questions/:token", /*checkLogin,*/ getQuestionsByUser);
 
 mainRouter.get("/delivery/:id", /*checkLogin ,*/ getDeliveryById);
 mainRouter.post("/delivery", /*checkLogin ,*/ postDelivery);
 mainRouter.patch("/delivery/:id", /*checkLogin ,*/ updateDelivery);
 mainRouter.delete("/delivery/:id", /*checkLogin ,*/ deleteDelivery);
 
-mainRouter.get("/:userID/shoppingCart", getSC);
+mainRouter.get("/:token/shoppingCart", getSC);
 mainRouter.post("/user/shoppingCart", postSC);
-mainRouter.delete("/:userID/shoppingCart/:productID", deleteSC);
+mainRouter.delete("/:token/shoppingCart/:productID", deleteSC);
+
+mainRouter.get("/:token/favorites", getFavorites);
+mainRouter.post("/user/favorites", postFavorites);
+mainRouter.delete("/:token/favorites/:productID", deleteFavorites);
 
 mainRouter.get("/auth/google", goToGoogle);
 mainRouter.get("/auth/google/callback", googleLogin);
