@@ -4,12 +4,7 @@ const User = require("../../models/User");
 const jwt = require("jsonwebtoken");
 
 const postSC = async (req, res) => {
-<<<<<<< HEAD
-  const { productsId, token } = req.body;
-  console.log(req.body);
-=======
   const { productsId, token, cantidad } = req.body;
->>>>>>> c8f3b1e7f1f65e230b257572ab89d6dc7de0a9ba
   try {
     if (!productsId || !token || !cantidad) {
       throw Error("Faltan datos");
