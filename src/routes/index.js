@@ -33,6 +33,7 @@ const goToGoogle = require("../handlers/Login/goToGoogle");
 const goToFacebook = require("../handlers/Login/goToFacebook");
 const facebookLogin = require("../handlers/Login/facebookLogin");
 const getProductsByUserId = require("../controllers/Products/getProductsByUserId");
+const upload = require("../config/multer");
 
 const checkLogin = require("../handlers/Login/checkLogin");
 
@@ -50,7 +51,7 @@ mainRouter.delete("/user/:token", checkLogin, deleteUser);
 mainRouter.get("/product", getAllProducts);
 mainRouter.get("/product/:productID", getProductsById);
 mainRouter.get("/:token/product", getProductsByUser);
-mainRouter.post("/product", checkLogin, postProduct);
+mainRouter.post("/product", checkLogin, upload.single("image"), postProduct);
 mainRouter.patch("/product/:productID" /*, checkLogin*/, updateProducts);
 mainRouter.get("/product/moreproducts/:id", getProductsByUserId);
 
