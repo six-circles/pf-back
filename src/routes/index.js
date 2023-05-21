@@ -33,7 +33,15 @@ const goToGoogle = require("../handlers/Login/goToGoogle");
 const goToFacebook = require("../handlers/Login/goToFacebook");
 const facebookLogin = require("../handlers/Login/facebookLogin");
 const getProductsByUserId = require("../controllers/Products/getProductsByUserId");
+
 const upload = require("../config/multer");
+
+const getCommentsByUser = require("../controllers/Comments/getCommentsByUser");
+const getQuestionsByUser = require("../controllers/QA/getQByUser");
+const getFavorites = require("../controllers/Favorites/getFavorites");
+const postFavorites = require("../controllers/Favorites/postFavorites");
+const deleteFavorites = require("../controllers/Favorites/deleteFavorites");
+
 
 const checkLogin = require("../handlers/Login/checkLogin");
 
@@ -62,6 +70,7 @@ mainRouter.delete(
   checkLogin,
   deleteComment
 );
+mainRouter.get("/product/comments/:token", /*checkLogin,*/ getCommentsByUser);
 
 mainRouter.get("/product/questions/:id", getQuestions);
 mainRouter.post("/product/questions", checkLogin, postQuestions);
@@ -73,15 +82,20 @@ mainRouter.delete(
   "/product/questions/answers/:id",
   /*checkLogin ,*/ deleteAnswers
 );
+mainRouter.get("/questions/:token", /*checkLogin,*/ getQuestionsByUser);
 
 mainRouter.get("/delivery/:id", /*checkLogin ,*/ getDeliveryById);
 mainRouter.post("/delivery", /*checkLogin ,*/ postDelivery);
 mainRouter.patch("/delivery/:id", /*checkLogin ,*/ updateDelivery);
 mainRouter.delete("/delivery/:id", /*checkLogin ,*/ deleteDelivery);
 
-mainRouter.get("/:userID/shoppingCart", getSC);
+mainRouter.get("/:token/shoppingCart", getSC);
 mainRouter.post("/user/shoppingCart", postSC);
-mainRouter.delete("/:userID/shoppingCart/:productID", deleteSC);
+mainRouter.delete("/:token/shoppingCart/:productID", deleteSC);
+
+mainRouter.get("/:token/favorites", getFavorites);
+mainRouter.post("/user/favorites", postFavorites);
+mainRouter.delete("/:token/favorites/:productID", deleteFavorites);
 
 mainRouter.get("/auth/google", goToGoogle);
 mainRouter.get("/auth/google/callback", googleLogin);
