@@ -5,7 +5,8 @@ const User = require("../../models/User");
 
 const googleLogin = async (req, res) => {
   const code = req.query.code;
-  const redirectUri = "http://localhost:3001/auth/google/callback";
+  const redirectUri =
+    "pf-back-sixcirlces-production.up.railway.app/auth/google/callback";
 
   const tokenUrl = "https://oauth2.googleapis.com/token";
   const data = {
