@@ -20,10 +20,10 @@ const postQuestions = async (req, res) => {
 
     product.questions = product.questions.concat(newQuestion._id);
 
-    res
-      .status(201)
-      .json({ message: "Question created", question: newQuestion });
     await product.save();
+    res
+    .status(201)
+      .json({ message: "Question created", question: newQuestion });
   } catch (err) {
     res.status(400).json({ error: err.message });
   }

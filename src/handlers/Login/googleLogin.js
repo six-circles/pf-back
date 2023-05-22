@@ -5,14 +5,13 @@ const User = require("../../models/User");
 
 const googleLogin = async (req, res) => {
   const code = req.query.code;
-  const redirectUri = "http://localhost:3001/auth/google/callback";
 
   const tokenUrl = "https://oauth2.googleapis.com/token";
   const data = {
     code,
     client_id: process.env.GOOGLE_CLIENT_ID,
     client_secret: process.env.GOOGLE_CLIENT_SECRET,
-    redirect_uri: redirectUri,
+    redirect_uri: process.env.redirectUriGoogle,
     grant_type: "authorization_code",
   };
 
