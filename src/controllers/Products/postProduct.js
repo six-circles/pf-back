@@ -52,7 +52,7 @@ const postProduct = async (req, res) => {
     });
 
     try {
-      const result = await cloudinary.uploader.upload(req.file.path);
+      const result = await cloudinary.uploader.upload(req.file.image.path);
       const objImg = { id: result.public_id, url: result.secure_url };
       newProduct.image.push(objImg);
       newProduct.save();
