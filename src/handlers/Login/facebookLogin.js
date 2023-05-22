@@ -6,7 +6,8 @@ const User = require("../../models/User");
 const facebookLogin = async (req, res) => {
   const code = req.query.code;
 
-  const redirectUri = "http://localhost:3001/auth/facebook/callback";
+  const redirectUri =
+    "pf-back-sixcirlces-production.up.railway.app/auth/facebook/callback";
   const tokenUrl = `https://graph.facebook.com/v14.0/oauth/access_token?client_id=${process.env.FACEBOOK_CLIENT_ID}&redirect_uri=${redirectUri}&client_secret=${process.env.FACEBOOK_CLIENT_SECRET}&code=${code}`;
 
   try {

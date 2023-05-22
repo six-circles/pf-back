@@ -1,11 +1,11 @@
 const Product = require("../../models/Product");
 const User = require("../../models/User");
 const jwt = require("jsonwebtoken");
-const cloudinary = require("../../config/cloudinary");
 
 const postProduct = async (req, res) => {
   const {
     title,
+    image,
     description,
     stock,
     price,
@@ -14,10 +14,10 @@ const postProduct = async (req, res) => {
     category,
     moreCharacteristics,
   } = req.body;
-  console.log(req.body);
   try {
     if (
       !title ||
+      !image ||
       !description ||
       !stock ||
       !price ||
@@ -42,6 +42,7 @@ const postProduct = async (req, res) => {
 
     const newProduct = await Product.create({
       title: title,
+      image: image,
       description: description,
       stock: stock,
       price: price,
@@ -50,16 +51,6 @@ const postProduct = async (req, res) => {
       category: category,
       moreCharacteristics: moreCharacteristics,
     });
-
-    try {
-      const result = await cloudinary.uploader.upload(req.file.path);
-      const objImg = { id: result.public_id, url: result.secure_url };
-      newProduct.image.push(objImg);
-      newProduct.save();
-    } catch (error) {
-      console.log(error);
-    }
-
     res.status(201).json({ message: "Product created", user: newProduct });
   } catch (err) {
     res.status(400).json({ error: err.message });
