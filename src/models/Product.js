@@ -12,8 +12,8 @@ const productSchema = new Schema(
     },
     image: [
       {
-        id: String,
-        url: String,
+        type: String,
+        required: true,
       },
     ],
     punctuations: {
@@ -61,9 +61,6 @@ const productSchema = new Schema(
     enable: {
       type: Boolean,
       default: true,
-    },
-    cantidadCarrito: {
-      type: Number,
     },
   },
   {
