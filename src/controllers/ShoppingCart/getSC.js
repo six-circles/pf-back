@@ -12,6 +12,8 @@ const getSC = async (req, res) => {
       image: 1,
       punctuations: 1,
       price: 1,
+      stock: 1,
+      condition: 1,
     });
 
     const SC = user.shoppingCart;
