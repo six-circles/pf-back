@@ -14,8 +14,11 @@ const getFavorites = async (req, res) => {
       price: 1,
     });
 
-    res.status(200).json(user.favorites);
+    const favorites = user.favorites;
+
+    res.status(200).json(favorites);
   } catch (error) {
+    console.log(error);
     res.status(404).json({ error: error.message });
   }
 };
