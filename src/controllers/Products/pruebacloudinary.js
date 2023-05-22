@@ -17,7 +17,7 @@ const pruebacloudinary = async (req, res) => {
       console.log(error);
     }
 
-    res.status(201).json({ message: "Product created", user: newProduct });
+    res.status(201).json({ message: "cloudinary created", user: newProduct });
   } catch (err) {
     res.status(400).json({ error: err.message });
   }
