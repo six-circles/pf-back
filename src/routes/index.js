@@ -38,6 +38,7 @@ const getQuestionsByUser = require("../controllers/QA/getQByUser");
 const getFavorites = require("../controllers/Favorites/getFavorites");
 const postFavorites = require("../controllers/Favorites/postFavorites");
 const deleteFavorites = require("../controllers/Favorites/deleteFavorites");
+const handlerMercadoPago = require("../controllers/MercadoPago/checkout");
 
 const checkLogin = require("../handlers/Login/checkLogin");
 
@@ -49,7 +50,7 @@ mainRouter.get("/users", getUsers);
 mainRouter.get("/user/:token", getUserById);
 mainRouter.get("/user", getUserByEmail);
 mainRouter.post("/user", postUser);
-mainRouter.patch("/user/:token", checkLogin, updateUser);
+mainRouter.patch("/user/:token", /*checkLogin,*/ updateUser);
 mainRouter.delete("/user/:token", checkLogin, deleteUser);
 
 mainRouter.get("/product", getAllProducts);
@@ -97,5 +98,7 @@ mainRouter.get("/auth/google", goToGoogle);
 mainRouter.get("/auth/google/callback", googleLogin);
 mainRouter.get("/auth/facebook", goToFacebook);
 mainRouter.get("/auth/facebook/callback", facebookLogin);
+
+mainRouter.post("/mercadopago/:token", handlerMercadoPago);
 
 module.exports = mainRouter;

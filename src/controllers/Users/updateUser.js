@@ -4,7 +4,7 @@ const bcrypt = require("bcrypt");
 
 const updateUser = async (req, res) => {
   const { token } = req.params;
-  const { name, email, phone, password, birthday } = req.body;
+  const { name, email, phone, password, birthday, address } = req.body;
   try {
     const userId = jwt.verify(token, process.env.SECRET_KEY_JWT);
     if (!userId) throw Error("No estas logueado");
@@ -18,6 +18,7 @@ const updateUser = async (req, res) => {
         phone: phone,
         password: hash,
         birthday: birthday,
+        address: address,
       });
     } else {
       await User.findByIdAndUpdate(user._id, {
@@ -25,6 +26,7 @@ const updateUser = async (req, res) => {
         email: email,
         phone: phone,
         birthday: birthday,
+        address: address,
       });
     }
     res.status(201).send({ message: "User updated" });
