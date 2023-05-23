@@ -48,7 +48,7 @@ const googleLogin = async (req, res) => {
       );
       res.redirect(
         307,
-        `http://localhost:5173?token=${token}&user=${user.name}`
+        `http://localhost:5173?token=${token}&user=${newUser.name}`
       );
     }
   } catch (error) {
