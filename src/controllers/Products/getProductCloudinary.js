@@ -1,4 +1,4 @@
-const ProductCloudinary = require("../../models/Product");
+const ProductCloudinary = require("../../models/ProductCloudinary");
 const getProductCloudinary = async (req, res) => {
   const {
     search,
