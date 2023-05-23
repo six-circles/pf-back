@@ -31,11 +31,10 @@ const googleLogin = async (req, res) => {
 
     if (user) {
       const token = jwt.sign({ userId: user._id }, process.env.SECRET_KEY_JWT);
-      // res.status(202).json({
-      //   token: token,
-      //   user: user.name,
-      // });
-      res.redirect(307, `http://localhost:5173?token=${token}&user=${user}`);
+      res.redirect(
+        307,
+        `http://localhost:5173?token=${token}&user=${user.name}`
+      );
     } else {
       const newUser = await User.create({
         name: userData.name,
@@ -47,11 +46,10 @@ const googleLogin = async (req, res) => {
         { userId: newUserFind._id },
         process.env.SECRET_KEY_JWT
       );
-      // res.status(202).json({
-      //   token: token,
-      //   user: newUserFind.name,
-      // });
-      res.redirect(307, `http://localhost:5173?token=${token}&user=${user}`);
+      res.redirect(
+        307,
+        `http://localhost:5173?token=${token}&user=${user.name}`
+      );
     }
   } catch (error) {
     res.status(500).send("Error en la autenticación con Google");
