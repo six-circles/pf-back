@@ -1,4 +1,4 @@
-const Product = require("../../models/Product");
+const ProductCloudinary = require("../../models/ProductCloudinary");
 const User = require("../../models/User");
 const jwt = require("jsonwebtoken");
 const cloudinary = require("../../config/cloudinary");
@@ -40,7 +40,7 @@ const pruebacloudinary = async (req, res) => {
 
     const user = await User.findById(userId.userId);
 
-    const newProduct = await Product.create({
+    const newProduct = await ProductCloudinary.create({
       title: title,
       description: description,
       stock: stock,
