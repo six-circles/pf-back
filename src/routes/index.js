@@ -41,6 +41,7 @@ const deleteFavorites = require("../controllers/Favorites/deleteFavorites");
 
 const checkLogin = require("../handlers/Login/checkLogin");
 const pruebacloudinary = require("../controllers/Products/pruebacloudinary");
+const getProductCloudinary = require("../controllers/Products/getProductCloudinary");
 const upload = require("../config/multer");
 
 const mainRouter = Router();
@@ -54,6 +55,7 @@ mainRouter.post("/user", postUser);
 mainRouter.patch("/user/:token", checkLogin, updateUser);
 mainRouter.delete("/user/:token", checkLogin, deleteUser);
 
+mainRouter.get("/pruebacloudinary", getProductCloudinary);
 mainRouter.post("/pruebacloudinary", upload.single("image"), pruebacloudinary);
 
 mainRouter.get("/product", getAllProducts);
