@@ -11,6 +11,12 @@ const favoritesSchema = new Schema({
       ref: "Product",
     },
   ],
+  comments: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "Comments",
+    },
+  ],
 });
 
 module.exports = model("Favorites", favoritesSchema);

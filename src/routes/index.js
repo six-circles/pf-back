@@ -60,7 +60,7 @@ mainRouter.patch("/product/:productID" /*, checkLogin*/, updateProducts);
 mainRouter.get("/product/moreproducts/:id", getProductsByUserId);
 
 mainRouter.get("/product/:productID/comments", getComments);
-mainRouter.post("/product/comments", checkLogin, postComment);
+mainRouter.post("/product/comments", /*checkLogin,*/ postComment);
 mainRouter.delete(
   "/product/:productID/comments/:commentID",
   checkLogin,
