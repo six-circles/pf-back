@@ -4,8 +4,8 @@ const jwt = require("jsonwebtoken");
 const cloudinary = require("../../config/cloudinary");
 
 const pruebacloudinary = async (req, res) => {
-  console.log(req.body);
-  console.log(req.file);
+  console.log("body:", req.body.image);
+  console.log("file:", req.file);
   try {
     const newProduct = {};
 
