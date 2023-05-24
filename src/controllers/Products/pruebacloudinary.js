@@ -13,7 +13,7 @@ const pruebacloudinary = async (req, res) => {
     token,
     category,
     moreCharacteristics,
-  } = JSON.parse(req.body.data);
+  } = req.body;
   console.log(req.body);
   console.log(req.file);
   try {
@@ -62,7 +62,7 @@ const pruebacloudinary = async (req, res) => {
 
     res.status(201).json({ message: "cloudinary created", user: newProduct });
   } catch (err) {
-    res.status(400).json({ error: err.message });
+    res.status(400).json({ error: err });
   }
 };
 module.exports = pruebacloudinary;
