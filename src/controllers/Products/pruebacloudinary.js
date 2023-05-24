@@ -13,8 +13,8 @@ const pruebacloudinary = async (req, res) => {
     token,
     category,
     moreCharacteristics,
-  } = req.body;
-  console.log(req.body);
+  } = JSON.parse(req.body);
+  console.log(JSON.parse(req.body));
   console.log(req.file);
   try {
     if (
