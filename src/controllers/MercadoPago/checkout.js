@@ -10,7 +10,7 @@ mercadopago.configure({
 const handlerMercadoPago = async (req, res) => {
   const { shoppingCart } = req.body;
   const { token } = req.params;
-  const URL = "http:localhost:5173/";
+  const URL = "http://localhost:5173/";
   try {
     const userId = jwt.verify(token, process.env.SECRET_KEY_JWT);
     if (!userId) throw Error("No estas logueado");
@@ -33,11 +33,11 @@ const handlerMercadoPago = async (req, res) => {
           area_code: "11",
           number: user.phone,
         },
-        address: { adress1: user.address },
+        address: { address1: user.address },
       },
-      payment_methods: {
-        excluded_payment_types: [{ id: "atm" }], // Excluye el método de pago "atm"
-      },
+      // payment_methods: {
+      //   excluded_payment_types: [{ id: "atm" }], // Excluye el método de pago "atm"
+      // },
       back_urls: {
         success: `${URL}success`,
         failure: `${URL}failure`,
@@ -48,16 +48,17 @@ const handlerMercadoPago = async (req, res) => {
       transaction_amount: 58.8,
     };
 
-    mercadopago.preferences
-      .create(preference)
-      .then((response) => {
-        console.log(response);
-        res.status(200).json({
-          id: response.body.id,
-          url: response.body.sandbox_init_point,
-        });
-      })
-      .catch((err) => console.log(err));
+    mercadopago.preferences.create(preference);
+    try {
+      const response = await mercadopago.preferences.create(preference);
+      console.log(response.body.sandbox_init_point);
+      res.redirect(307, response.body.sandbox_init_point);
+    } catch (err) {
+      console.log(err);
+      res
+        .status(500)
+        .json({ message: "Error al crear la preferencia de pago" });
+    }
   } catch (err) {
     console.log(err);
     res.status(404).json({ message: err.message });
