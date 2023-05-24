@@ -15,7 +15,6 @@ const pruebacloudinary = async (req, res) => {
     moreCharacteristics,
   } = req.body;
   console.log(req.body);
-  console.log(req.file);
   try {
     if (
       !title ||
@@ -50,19 +49,37 @@ const pruebacloudinary = async (req, res) => {
       category: category,
       moreCharacteristics: moreCharacteristics,
     });
-
     try {
-      const result = await cloudinary.uploader.upload(req.file.path);
-      const objImg = { cloudinaryID: result.public_id, url: result.secure_url };
-      newProduct.image.push(objImg);
-      newProduct.save();
+      let arrayImage = [];
+      if (req.files.image1) {
+        arrayImage.push(req.files.image1[0]);
+      }
+      if (req.files.image2) {
+        arrayImage.push(req.files.image2[0]);
+      }
+      if (req.files.image3) {
+        arrayImage.push(req.files.image3[0]);
+      }
+      console.log("arrayimage", arrayImage);
+
+      for (let image of arrayImage) {
+        const result = await cloudinary.uploader.upload(image.path);
+        let objImg = {
+          cloudinaryID: result.public_id,
+          url: result.secure_url,
+        };
+        newProduct.image.push(objImg);
+        newProduct.save();
+      }
+      console.log(newProduct);
     } catch (error) {
       console.log(error);
     }
 
     res.status(201).json({ message: "cloudinary created", user: newProduct });
   } catch (err) {
-    res.status(400).json({ error: err });
+    res.status(400).json({ error: err.message });
   }
 };
+
 module.exports = pruebacloudinary;
