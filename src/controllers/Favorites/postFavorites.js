@@ -1,5 +1,6 @@
 const Product = require("../../models/Product");
 const User = require("../../models/User");
+const Favorites = require("../../models/Favorites");
 const jwt = require("jsonwebtoken");
 
 const postFavorites = async (req, res) => {
@@ -14,16 +15,21 @@ const postFavorites = async (req, res) => {
     const user = await User.findById(userId.userId);
     const product = await Product.findById(productsId);
 
-    user.favorites = user.favorites.concat(product._id);
+    const newFavorite = await Favorites.create({
+      user: user._id,
+      product: product._id,
+    });
 
+    user.favorites.push(newFavorite._id);
     await user.save();
 
     res
       .status(201)
-      .json({ message: "Product added to favorite", content: user });
+      .json({ message: "Product added to favorites", content: user });
   } catch (err) {
     console.log(err);
     res.status(400).json({ error: err.message });
   }
 };
+
 module.exports = postFavorites;
