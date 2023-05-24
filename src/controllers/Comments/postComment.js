@@ -35,12 +35,6 @@ const postComment = async (req, res) => {
 
     product.comments = product.comments.concat(newComment._id);
 
-    for (let i = 0; i < comments.length; i++) {
-      suma = comments[i].punctuation + suma;
-    }
-
-    product.punctuations = suma / comments.length;
-
     await product.save();
 
     res.status(201).json({ message: "Comment created", user: newComment });
