@@ -17,7 +17,7 @@ const getProductsByUser = async (req, res) => {
         _id: 0,
       })
       .populate("user", {
-        _id: 0,
+        _id: 1,
         name: 1,
         email: 1,
       })

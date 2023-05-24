@@ -54,6 +54,7 @@ const handlerMercadoPago = async (req, res) => {
         console.log(response);
         res.status(200).json({
           id: response.body.id,
+          url: response.body.sandbox_init_point,
         });
       })
       .catch((err) => console.log(err));
