@@ -11,17 +11,14 @@ const getProductsByUserId = async (req, res) => {
       .populate("comments", {
         products: 0,
         __v: 0,
-        _id: 0,
       })
       .populate("user", {
-        _id: 0,
         name: 1,
         email: 1,
       })
       .populate("questions", {
         products: 0,
         __v: 0,
-        _id: 0,
       });
     for (element of products) {
       let suma = 0;
