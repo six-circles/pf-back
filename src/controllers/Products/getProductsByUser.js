@@ -24,7 +24,7 @@ const getProductsByUser = async (req, res) => {
       .populate("questions", {
         products: 0,
         __v: 0,
-        _id: 0,
+        _id: 1,
       });
 
     for (element of products) {
