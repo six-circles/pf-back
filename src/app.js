@@ -6,6 +6,8 @@ const mainRouter = require("./routes");
 
 const app = express();
 
+app.set("view engine", "ejs");
+
 app.use(cors());
 
 app.use(bodyParser.json());
