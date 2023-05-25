@@ -56,7 +56,6 @@ mainRouter.patch("/user/:token", checkLogin, updateUser);
 mainRouter.delete("/user/:token", checkLogin, deleteUser);
 
 mainRouter.get("/pruebacloudinary", getProductCloudinary);
-// mainRouter.post("/pruebacloudinary", upload.single("image"), pruebacloudinary);
 mainRouter.post("/pruebacloudinary", uploadMultiple, pruebacloudinary);
 
 mainRouter.get("/product", getAllProducts);
