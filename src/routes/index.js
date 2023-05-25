@@ -41,8 +41,6 @@ const handlerMercadoPago = require("../controllers/MercadoPago/checkout");
 
 const postProduct = require("../controllers/Products/postProducts");
 
-const handlerMercadoPago = require("../controllers/MercadoPago/checkout");
-
 const checkLogin = require("../handlers/Login/checkLogin");
 const uploadMultiple = require("../config/multer");
 
