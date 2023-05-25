@@ -10,12 +10,6 @@ const deleteComment = async (req, res) => {
 
     const allComments = await Comments.find({ products: { _id: productID } });
 
-    for (let i = 0; i < allComments.length; i++) {
-      suma = allComments[i].punctuation + suma;
-    }
-
-    product.punctuations = suma / allComments.length;
-
     await product.save();
 
     res.status(201).send({ message: "Comment deleted" });

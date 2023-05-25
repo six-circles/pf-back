@@ -48,6 +48,7 @@ const postProduct = async (req, res) => {
       category: category,
       moreCharacteristics: moreCharacteristics,
     });
+
     try {
       console.log("files:", req.files);
       if (req.files.image1) {

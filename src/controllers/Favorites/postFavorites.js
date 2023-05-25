@@ -22,6 +22,7 @@ const postFavorites = async (req, res) => {
       .status(201)
       .json({ message: "Product added to favorite", content: user });
   } catch (err) {
+    console.log(err);
     res.status(400).json({ error: err.message });
   }
 };

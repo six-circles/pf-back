@@ -8,12 +8,10 @@ const getProductsById = async (req, res) => {
       .populate("comments", {
         products: 0,
         __v: 0,
-        _id: 0,
       })
       .populate("questions", {
         products: 0,
         __v: 0,
-        _id: 0,
       })
       .populate("user", {
         phone: 0,
@@ -34,8 +32,18 @@ const getProductsById = async (req, res) => {
       const userComment = user[0].name;
       products[0].questions[i].userName = userComment;
     }
+
+    let suma = 0;
+    if (products[0].comments.length) {
+      for (comment of products[0].comments) {
+        suma += comment.punctuation;
+      }
+      products[0].punctuations = suma / products[0].comments.length;
+    }
+
     res.status(200).json(products);
   } catch (error) {
+    console.log(error);
     res.status(404).json({ error: error.message });
   }
 };

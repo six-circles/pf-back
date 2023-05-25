@@ -8,7 +8,7 @@ const postAnswers = async (req, res) => {
     const question = await Questions.findById(questionId);
 
     const newAnswers = await Answer.create({
-      quesiton: question._id,
+      question: question._id,
       body: body,
     });
 
