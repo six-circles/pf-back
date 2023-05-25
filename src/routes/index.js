@@ -5,7 +5,6 @@ const updateUser = require("../controllers/Users/updateUser");
 const deleteUser = require("../controllers/Users/deleteUser");
 const getAllProducts = require("../controllers/Products/getAllProducts");
 const getProductsById = require("../controllers/Products/getProductsById");
-const postProduct = require("../controllers/Products/postProduct");
 const updateProducts = require("../controllers/Products/updateProducts");
 const postComment = require("../controllers/Comments/postComment");
 const getComments = require("../controllers/Comments/getComment");
@@ -38,10 +37,9 @@ const getQuestionsByUser = require("../controllers/QA/getQByUser");
 const getFavorites = require("../controllers/Favorites/getFavorites");
 const postFavorites = require("../controllers/Favorites/postFavorites");
 const deleteFavorites = require("../controllers/Favorites/deleteFavorites");
+const postProduct = require("../controllers/Products/postProducts");
 
 const checkLogin = require("../handlers/Login/checkLogin");
-const pruebacloudinary = require("../controllers/Products/pruebacloudinary");
-const getProductCloudinary = require("../controllers/Products/getProductCloudinary");
 const uploadMultiple = require("../config/multer");
 
 const mainRouter = Router();
@@ -55,20 +53,12 @@ mainRouter.post("/user", postUser);
 mainRouter.patch("/user/:token", checkLogin, updateUser);
 mainRouter.delete("/user/:token", checkLogin, deleteUser);
 
-mainRouter.get("/pruebacloudinary", getProductCloudinary);
-mainRouter.post(
-  "/pruebacloudinary",
-  checkLogin,
-  uploadMultiple,
-  pruebacloudinary
-);
-
 mainRouter.get("/product", getAllProducts);
 mainRouter.get("/product/:productID", getProductsById);
 mainRouter.get("/:token/product", getProductsByUser);
-mainRouter.post("/product", checkLogin, postProduct);
-mainRouter.patch("/product/:productID" /*, checkLogin*/, updateProducts);
 mainRouter.get("/product/moreproducts/:id", getProductsByUserId);
+mainRouter.post("/product", checkLogin, uploadMultiple, postProduct);
+mainRouter.patch("/product/:productID" /*, checkLogin*/, updateProducts);
 
 mainRouter.get("/product/:productID/comments", getComments);
 mainRouter.post("/product/comments", checkLogin, postComment);

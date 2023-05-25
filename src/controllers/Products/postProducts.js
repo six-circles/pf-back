@@ -4,7 +4,7 @@ const User = require("../../models/User");
 const jwt = require("jsonwebtoken");
 const cloudinary = require("../../config/cloudinary");
 
-const pruebacloudinary = async (req, res) => {
+const postProduct = async (req, res) => {
   const {
     title,
     description,
@@ -15,7 +15,6 @@ const pruebacloudinary = async (req, res) => {
     category,
     moreCharacteristics,
   } = JSON.parse(req.body.data);
-  console.log(req.body);
   try {
     if (
       !title ||
@@ -71,10 +70,10 @@ const pruebacloudinary = async (req, res) => {
       console.log(error);
     }
 
-    res.status(201).json({ message: "cloudinary created", user: newProduct });
+    res.status(201).json({ message: "Product created", user: newProduct });
   } catch (err) {
     res.status(400).json({ error: err.message });
   }
 };
 
-module.exports = pruebacloudinary;
+module.exports = postProduct;
