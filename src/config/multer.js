@@ -25,9 +25,5 @@ var storage = multer.diskStorage({
 });
 
 var upload = multer({ storage: storage });
-var uploadMultiple = upload.fields([
-  { name: "image1", maxCount: 10 },
-  { name: "image2", maxCount: 10 },
-  { name: "image3", maxCount: 10 },
-]);
+var uploadMultiple = upload.fields([{ name: "image1", maxCount: 3 }]);
 module.exports = uploadMultiple;

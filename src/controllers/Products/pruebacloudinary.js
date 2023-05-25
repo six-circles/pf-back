@@ -13,7 +13,7 @@ const pruebacloudinary = async (req, res) => {
     token,
     category,
     moreCharacteristics,
-  } = Json.parse(req.body.data);
+  } = JSON.parse(req.body.data);
   console.log(req.body);
   try {
     if (
@@ -50,27 +50,20 @@ const pruebacloudinary = async (req, res) => {
       moreCharacteristics: moreCharacteristics,
     });
     try {
-      let arrayImage = [];
       if (req.files.image1) {
-        arrayImage.push(req.files.image1[0]);
+        const files = req.files.image1;
+        console.log("files", req.files.image1);
+        for (let image of files) {
+          const result = await cloudinary.uploader.upload(image.path);
+          let objImg = {
+            cloudinaryID: result.public_id,
+            url: result.secure_url,
+          };
+          newProduct.image.push(objImg);
+          newProduct.save();
+        }
       }
-      if (req.files.image2) {
-        arrayImage.push(req.files.image2[0]);
-      }
-      if (req.files.image3) {
-        arrayImage.push(req.files.image3[0]);
-      }
-      console.log("arrayimage", arrayImage);
 
-      for (let image of arrayImage) {
-        const result = await cloudinary.uploader.upload(image.path);
-        let objImg = {
-          cloudinaryID: result.public_id,
-          url: result.secure_url,
-        };
-        newProduct.image.push(objImg);
-        newProduct.save();
-      }
       console.log(newProduct);
     } catch (error) {
       console.log(error);
