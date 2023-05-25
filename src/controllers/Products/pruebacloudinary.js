@@ -50,9 +50,10 @@ const pruebacloudinary = async (req, res) => {
       moreCharacteristics: moreCharacteristics,
     });
     try {
+      console.log("files:", req.files);
       if (req.files.image1) {
         const files = req.files.image1;
-        console.log("files", req.files.image1);
+        console.log("images", req.files.image1);
         for (let image of files) {
           const result = await cloudinary.uploader.upload(image.path);
           let objImg = {
