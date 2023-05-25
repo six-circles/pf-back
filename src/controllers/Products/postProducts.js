@@ -13,7 +13,7 @@ const postProduct = async (req, res) => {
     token,
     category,
     moreCharacteristics,
-  } = JSON.parse(req.body.data);
+  } = req.body.data ? JSON.parse(req.body.data) : req.body;
   try {
     if (
       !title ||
