@@ -37,7 +37,7 @@ const getQuestionsByUser = require("../controllers/QA/getQByUser");
 const getFavorites = require("../controllers/Favorites/getFavorites");
 const postFavorites = require("../controllers/Favorites/postFavorites");
 const deleteFavorites = require("../controllers/Favorites/deleteFavorites");
-const lerMercadoPago = require("../controllers/MercadoPago/checkout");
+const handlerMercadoPago = require("../controllers/MercadoPago/checkout");
 
 const postProduct = require("../controllers/Products/postProducts");
 
