@@ -16,10 +16,13 @@ const checkLogin = async (req, response, next) => {
 
     const user = await User.findOne({ _id: decodedToken.userId });
     if (!user) {
+      console.log("error 1");
       return response.status(404).send("User not found");
     }
+    console.log("ok");
     next();
   } catch (error) {
+    console.log("error 2");
     response.status(500).json({ error: "You need to be logged in" });
   }
 };
