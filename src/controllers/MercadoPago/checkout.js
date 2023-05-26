@@ -52,7 +52,7 @@ const handlerMercadoPago = async (req, res) => {
     try {
       const response = await mercadopago.preferences.create(preference);
       console.log(response.body.sandbox_init_point);
-      res.redirect(307, response.body.sandbox_init_point);
+      res.json({ url: response.body.sandbox_init_point });
     } catch (err) {
       console.log(err);
       res
