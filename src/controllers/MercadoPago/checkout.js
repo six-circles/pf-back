@@ -35,24 +35,18 @@ const handlerMercadoPago = async (req, res) => {
         },
         address: { address1: user.address },
       },
-      // payment_methods: {
-      //   excluded_payment_types: [{ id: "atm" }], // Excluye el método de pago "atm"
-      // },
       back_urls: {
         success: `${URL}success`,
         failure: `${URL}failure`,
         pending: `${URL}pending`,
       },
       auto_return: "approved",
-      notification_url: `${URL}notification`,
-      transaction_amount: 58.8,
     };
 
-    mercadopago.preferences.create(preference);
     try {
       const response = await mercadopago.preferences.create(preference);
-      console.log(response.body.sandbox_init_point);
-      res.json({ url: response.body.sandbox_init_point });
+      console.log(response.body.init_point);
+      res.json({ id: response.body.id });
     } catch (err) {
       console.log(err);
       res
