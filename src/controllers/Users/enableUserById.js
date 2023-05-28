@@ -1,8 +1,8 @@
 const User = require("../../models/User");
-const jwt = require("jsonwebtoken");
 
 const deleteUserById = async (req, res) => {
   const { id } = req.query;
+  console.log(req.query);
   try {
     const user = await User.findById(id);
     user.enable = false;

@@ -55,7 +55,7 @@ mainRouter.get("/user", getUserByEmail);
 mainRouter.post("/user", postUser);
 mainRouter.patch("/user/:token", /*checkLogin,*/ updateUser);
 mainRouter.delete("/user/:token", checkLogin, deleteUser);
-mainRouter.put("/user", enableUserById);
+mainRouter.patch("/user", enableUserById);
 
 mainRouter.get("/product", getAllProducts);
 mainRouter.get("/product/:productID", getProductsById);
