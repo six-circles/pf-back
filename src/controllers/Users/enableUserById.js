@@ -5,9 +5,15 @@ const deleteUserById = async (req, res) => {
   console.log(req.query);
   try {
     const user = await User.findById(id);
-    user.enable = false;
-    user.save();
-    res.status(201).send({ message: "User blocked" });
+    if (user.enable === false) {
+      user.enable = true;
+      user.save();
+      res.status(201).send({ message: "Unlocked user" });
+    } else {
+      user.enable = false;
+      user.save();
+      res.status(201).send({ message: "User blocked" });
+    }
   } catch (err) {
     res.status(400).send({ error: err.message });
   }
