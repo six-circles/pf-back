@@ -12,16 +12,16 @@ const deleteUserById = async (req, res) => {
       user.save();
       for (let element of products) {
         element.enable = true;
+        element.save();
       }
-      products.save();
       res.status(201).send({ message: "Unlocked user" });
     } else {
       user.enable = false;
       user.save();
       for (let element of products) {
         element.enable = false;
+        element.save();
       }
-      products.save();
       res.status(201).send({ message: "User blocked" });
     }
   } catch (err) {
