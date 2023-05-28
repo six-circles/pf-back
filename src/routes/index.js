@@ -43,6 +43,7 @@ const postProduct = require("../controllers/Products/postProducts");
 
 const checkLogin = require("../handlers/Login/checkLogin");
 const uploadMultiple = require("../config/multer");
+const enableUserById = require("../controllers/Users/enableUserById");
 
 const mainRouter = Router();
 
@@ -54,6 +55,7 @@ mainRouter.get("/user", getUserByEmail);
 mainRouter.post("/user", postUser);
 mainRouter.patch("/user/:token", /*checkLogin,*/ updateUser);
 mainRouter.delete("/user/:token", checkLogin, deleteUser);
+mainRouter.put("/user", enableUserById);
 
 mainRouter.get("/product", getAllProducts);
 mainRouter.get("/product/:productID", getProductsById);
