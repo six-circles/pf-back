@@ -2,10 +2,10 @@ const User = require("../../models/User");
 const Product = require("../../models/Product");
 
 const deleteUserById = async (req, res) => {
-  const { id } = req.query;
+  const { email } = req.query;
   console.log(req.query);
   try {
-    const user = await User.findById(id);
+    const user = await User.findOne({ email: email });
     const products = await Product.find({ user: user });
     if (user.enable === false) {
       user.enable = true;
