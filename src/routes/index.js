@@ -79,10 +79,11 @@ mainRouter.delete(
 mainRouter.get("/product/comments/:token", checkLogin, getCommentsByUser);
 
 mainRouter.get("/product/questions/:id", getQuestions);
-mainRouter.post("/product/questions", checkLogin, postQuestions);
+mainRouter.post("/product/questions", /*checkLogin,*/ postQuestions);
 mainRouter.delete("/product/questions/:id", checkLogin, deleteQuestions);
 
 mainRouter.get("/product/questions/answers/:id", getAnswers);
+
 mainRouter.post("/product/questions/answers", checkLogin, postAnswers);
 mainRouter.delete("/product/questions/answers/:id", checkLogin, deleteAnswers);
 mainRouter.get("/questions/:token", checkLogin, getQuestionsByUser);
