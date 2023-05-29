@@ -47,11 +47,18 @@ const postProduct = require("../controllers/Products/postProducts");
 
 const checkLogin = require("../handlers/Login/checkLogin");
 const uploadMultiple = require("../config/multer");
+const forgotPassword = require("../controllers/Password/forgotPassword");
+const resetPassword = require("../controllers/Password/resetPassword");
+const postResetPassword = require("../controllers/Password/postResetPassword");
 const enableUserById = require("../controllers/Users/enableUserById");
 
 const mainRouter = Router();
 
 mainRouter.use("/login", login);
+
+mainRouter.post("/forgot-password", forgotPassword);
+mainRouter.get("/reset-password/:email/:token", resetPassword);
+mainRouter.post("/reset-password/:email/:token", postResetPassword);
 
 mainRouter.get("/users", getUsers);
 mainRouter.get("/user/:token", getUserById);
@@ -79,10 +86,11 @@ mainRouter.delete(
 mainRouter.get("/product/comments/:token", checkLogin, getCommentsByUser);
 
 mainRouter.get("/product/questions/:id", getQuestions);
-mainRouter.post("/product/questions", checkLogin, postQuestions);
+mainRouter.post("/product/questions", /*checkLogin,*/ postQuestions);
 mainRouter.delete("/product/questions/:id", checkLogin, deleteQuestions);
 
 mainRouter.get("/product/questions/answers/:id", getAnswers);
+
 mainRouter.post("/product/questions/answers", checkLogin, postAnswers);
 mainRouter.delete("/product/questions/answers/:id", checkLogin, deleteAnswers);
 mainRouter.get("/questions/:token", checkLogin, getQuestionsByUser);
