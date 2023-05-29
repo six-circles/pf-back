@@ -52,8 +52,8 @@ const mainRouter = Router();
 mainRouter.use("/login", login);
 
 mainRouter.post("/forgot-password", forgotPassword);
-mainRouter.get("/reset-password/:id/:token", resetPassword);
-mainRouter.post("/reset-password/:id/:token", postResetPassword);
+mainRouter.get("/reset-password/:email/:token", resetPassword);
+mainRouter.post("/reset-password/:email/:token", postResetPassword);
 
 mainRouter.get("/users", getUsers);
 mainRouter.get("/user/:token", getUserById);
@@ -61,7 +61,6 @@ mainRouter.get("/user", getUserByEmail);
 mainRouter.post("/user", postUser);
 mainRouter.patch("/user/:token", /*checkLogin,*/ updateUser);
 mainRouter.delete("/user/:token", checkLogin, deleteUser);
-mainRouter.delete("/user/:id", deleteUserId);
 
 mainRouter.get("/product", getAllProducts);
 mainRouter.get("/product/:productID", getProductsById);
