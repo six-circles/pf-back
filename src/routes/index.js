@@ -38,6 +38,8 @@ const getFavorites = require("../controllers/Favorites/getFavorites");
 const postFavorites = require("../controllers/Favorites/postFavorites");
 const deleteFavorites = require("../controllers/Favorites/deleteFavorites");
 const handlerMercadoPago = require("../controllers/MercadoPago/checkout");
+const postOrder = require("../controllers/Order/postOrder");
+const getOrder = require("../controllers/Order/getOrder");
 
 const postProduct = require("../controllers/Products/postProducts");
 
@@ -104,5 +106,8 @@ mainRouter.get("/auth/facebook", goToFacebook);
 mainRouter.get("/auth/facebook/callback", facebookLogin);
 
 mainRouter.post("/mercadopago/:token", handlerMercadoPago);
+
+mainRouter.post("/order", postOrder);
+mainRouter.get("/order/:orderId", getOrder);
 
 module.exports = mainRouter;
