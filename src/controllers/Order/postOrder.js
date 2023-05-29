@@ -21,6 +21,7 @@ const postOrder = async (req, res) => {
       .status(200)
       .json({ message: "Order created successfully", order: newOrder });
   } catch (err) {
+    console.log(err);
     res.status(400).json({ error: err.message });
   }
 };

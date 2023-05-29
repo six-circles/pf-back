@@ -108,6 +108,6 @@ mainRouter.get("/auth/facebook/callback", facebookLogin);
 mainRouter.post("/mercadopago/:token", handlerMercadoPago);
 
 mainRouter.post("/order", postOrder);
-mainRouter.get("/order/:orderId", getOrder);
+mainRouter.get("/order/:orderId/:token", getOrder);
 
 module.exports = mainRouter;
