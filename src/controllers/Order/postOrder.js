@@ -4,6 +4,9 @@ const jwt = require("jsonwebtoken");
 
 const postOrder = async (req, res) => {
   const { token, shoppingCart } = req.body;
+
+  console.log(req.body);
+
   try {
     if (!token && !shoppingCart) {
       throw Error("Faltan datos");

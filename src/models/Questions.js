@@ -18,10 +18,7 @@ const questionsSchema = new Schema({
     type: "string",
     required: true,
   },
-  answer: {
-    type: Schema.Types.ObjectId,
-    ref: "Answer",
-  },
+  answer: { type: "string" },
 });
 
 module.exports = model("Questions", questionsSchema);

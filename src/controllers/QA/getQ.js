@@ -23,11 +23,8 @@ const getQuestions = async (req, res) => {
         createdAt: 0,
         updatedAt: 0,
         __v: 0,
-      })
-      .populate("answer", {
-        question: 0,
-        body: 1,
       });
+    console.log(questions);
     res.status(200).json(questions);
   } catch (err) {
     res.status(404).json({ error: err.message });
