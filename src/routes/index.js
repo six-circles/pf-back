@@ -47,11 +47,18 @@ const postProduct = require("../controllers/Products/postProducts");
 
 const checkLogin = require("../handlers/Login/checkLogin");
 const uploadMultiple = require("../config/multer");
+const forgotPassword = require("../controllers/Password/forgotPassword");
+const resetPassword = require("../controllers/Password/resetPassword");
+const postResetPassword = require("../controllers/Password/postResetPassword");
 const enableUserById = require("../controllers/Users/enableUserById");
 
 const mainRouter = Router();
 
 mainRouter.use("/login", login);
+
+mainRouter.post("/forgot-password", forgotPassword);
+mainRouter.get("/reset-password/:email/:token", resetPassword);
+mainRouter.post("/reset-password/:email/:token", postResetPassword);
 
 mainRouter.get("/users", getUsers);
 mainRouter.get("/user/:token", getUserById);
