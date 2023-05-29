@@ -12,9 +12,6 @@ const sendMail = async (userEmail, subject, text, html) => {
       text: text, // plain text body
       html: html, // html body
     });
-
-    console.log(info);
-
   } catch (error) {
     console.log(error.message);
   }
