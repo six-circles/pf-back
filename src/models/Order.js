@@ -7,8 +7,8 @@ const orderSchema = new Schema({
   },
   shoppingCart: [
     {
-      type: Object,
-      required: true,
+      type: Schema.Types.ObjectId,
+      ref: "Product",
     },
   ],
 });

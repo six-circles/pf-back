@@ -3,7 +3,7 @@ const Order = require("../../models/Order");
 const jwt = require("jsonwebtoken");
 
 const postOrder = async (req, res) => {
-  const { token, shoppingCart } = req.body;
+  const { token } = req.body;
   try {
     if (!token && !shoppingCart) {
       throw Error("Faltan datos");
@@ -11,10 +11,18 @@ const postOrder = async (req, res) => {
     const userId = jwt.verify(token, process.env.SECRET_KEY_JWT);
     if (!userId) throw Error("No estas logueado");
 
-    const user = await User.findById(userId.userId);
+    const user = await User.findById(userId.userId).populate("shoppingCart", {
+      title: 1,
+      image: 1,
+      punctuations: 1,
+      price: 1,
+      stock: 1,
+      condition: 1,
+      enable: 1,
+    });
 
     const newOrder = await Order.create({
-      shoppingCart: shoppingCart,
+      shoppingCart: user.shoppingCart,
       user: user._id,
     });
     res
