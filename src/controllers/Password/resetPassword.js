@@ -9,7 +9,7 @@ const resetPassword = async (req, res) => {
   const secret = secretKey + user.password;
   try {
     const payload = jwt.verify(token, secret);
-    res.status(200).json({ message: user.email });
+    res.status(200).json({ user: user.name, email: payload.email });
   } catch (error) {
     res.status(404).json({ error: error.message });
   }
