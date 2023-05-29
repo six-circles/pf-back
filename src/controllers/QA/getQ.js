@@ -17,6 +17,7 @@ const getQuestions = async (req, res) => {
       })
       .populate("user", {
         phone: 0,
+        name: 1,
         password: 0,
         birthday: 0,
         createdAt: 0,
@@ -25,6 +26,7 @@ const getQuestions = async (req, res) => {
       })
       .populate("answer", {
         question: 0,
+        body: 1,
       });
     res.status(200).json(questions);
   } catch (err) {
