@@ -51,6 +51,10 @@ const userSchema = new Schema(
         ref: "Product",
       },
     ],
+    enable: {
+      type: Boolean,
+      default: true,
+    },
   },
   {
     timestamps: true,
