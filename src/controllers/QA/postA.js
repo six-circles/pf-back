@@ -7,14 +7,9 @@ const postAnswers = async (req, res) => {
     if (!body || !questionId) throw Error("Faltan datos");
     const question = await Questions.findById(questionId);
 
-    const newAnswers = await Answer.create({
-      question: question._id,
-      body: body,
-    });
+    question.answer = body;
 
-    question.answer = question.answer.concat(newAnswers._id);
-
-    res.status(201).json({ message: "Answer created", answer: newAnswers });
+    res.status(201).json({ message: "Answer created", question: question });
     await question.save();
   } catch (err) {
     res.status(400).json({ error: err.message });
