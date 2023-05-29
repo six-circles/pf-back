@@ -41,6 +41,7 @@ const handlerMercadoPago = require("../controllers/MercadoPago/checkout");
 const postOrder = require("../controllers/Order/postOrder");
 const getOrder = require("../controllers/Order/getOrder");
 const eraseSC = require("../controllers/ShoppingCart/eraseSC");
+const deleteProduct = require("../controllers/Products/deleteProduct");
 
 const postProduct = require("../controllers/Products/postProducts");
 
@@ -66,6 +67,7 @@ mainRouter.get("/:token/product", getProductsByUser);
 mainRouter.get("/product/moreproducts/:id", getProductsByUserId);
 mainRouter.post("/product", checkLogin, uploadMultiple, postProduct);
 mainRouter.patch("/product/:productID", checkLogin, updateProducts);
+mainRouter.delete("/product/:productId", deleteProduct);
 
 mainRouter.get("/product/:productID/comments", getComments);
 mainRouter.post("/product/comments", checkLogin, postComment);
