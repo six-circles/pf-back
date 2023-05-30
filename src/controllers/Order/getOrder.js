@@ -22,11 +22,39 @@ const getOrder = async (req, res) => {
         stock: 1,
         condition: 1,
         enable: 1,
-        cantidadCarrito: 1,
       });
+    const SC = order.shoppingCart;
 
-    res.status(200).json({ order: order });
+    let contador = {};
+    for (let i = 0; i < SC.length; i++) {
+      let elemento = JSON.stringify(SC[i]);
+      contador[elemento] = (contador[elemento] || 0) + 1;
+    }
+
+    const allShoppingCart = [];
+
+    for (element of SC) {
+      let elementoString = JSON.stringify(element);
+      let elementoObjeto = JSON.parse(elementoString);
+      elementoObjeto.cantidadCarrito = contador[elementoString];
+      allShoppingCart.push(elementoObjeto);
+    }
+
+    const ShoppingCartToShow = [];
+
+    for (const element of allShoppingCart) {
+      let isDuplicate = ShoppingCartToShow.some(
+        (item) => item._id === element._id
+      );
+      if (!isDuplicate) {
+        ShoppingCartToShow.push(element);
+      }
+    }
+    order.shoppingCart = ShoppingCartToShow;
+
+    res.status(200).json({ order: order, shoppingCart: ShoppingCartToShow });
   } catch (err) {
+    console.log(err);
     res.status(400).json({ error: err.message });
   }
 };

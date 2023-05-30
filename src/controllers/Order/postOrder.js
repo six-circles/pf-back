@@ -19,7 +19,6 @@ const postOrder = async (req, res) => {
       stock: 1,
       condition: 1,
       enable: 1,
-      cantidadCarrito: 1,
     });
 
     const newOrder = await Order.create({

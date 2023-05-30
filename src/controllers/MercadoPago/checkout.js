@@ -47,7 +47,6 @@ const handlerMercadoPago = async (req, res) => {
       !user.email ||
       !user.address ||
       !user.phone ||
-      !user.name ||
       !user.birthday
     ) {
       throw Error("Debes completar tus datos antes de realizar una compra");
