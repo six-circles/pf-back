@@ -1,13 +1,12 @@
 const Delivery = require("../../models/Delivery");
 const postDelivery = async (req, res) => {
-  const { type, status, weight } = req.body;
+  const { type, status } = req.body;
   try {
-    if (!type || !status || !weight) throw Error("Faltan datos");
+    if (!type || !status) throw Error("Faltan datos");
 
     const newDelivery = await Delivery.create({
       type: type,
       status: status,
-      weight: weight,
     });
     res.status(201).send({ message: "Delivery created", user: newDelivery });
   } catch (err) {
