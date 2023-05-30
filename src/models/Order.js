@@ -7,7 +7,7 @@ const orderSchema = new Schema({
   },
   shoppingCart: [
     {
-      type: String,
+      type: Schema.Types.ObjectId,
       ref: "Product",
     },
   ],

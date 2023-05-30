@@ -14,6 +14,7 @@ const getFavorites = async (req, res) => {
       price: 1,
       stock: 1,
       condition: 1,
+      enable: 1,
     });
 
     const favorites = user.favorites;

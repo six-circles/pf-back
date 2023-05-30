@@ -40,6 +40,7 @@ const deleteFavorites = require("../controllers/Favorites/deleteFavorites");
 const handlerMercadoPago = require("../controllers/MercadoPago/checkout");
 const postOrder = require("../controllers/Order/postOrder");
 const getOrder = require("../controllers/Order/getOrder");
+const getOrdersById = require("../controllers/Order/getOrdersById");
 const eraseSC = require("../controllers/ShoppingCart/eraseSC");
 const deleteProduct = require("../controllers/Products/deleteProduct");
 
@@ -118,5 +119,5 @@ mainRouter.post("/mercadopago/:token", handlerMercadoPago);
 
 mainRouter.post("/order", postOrder);
 mainRouter.get("/order/:orderId/:token", getOrder);
-
+mainRouter.get("/order/:token", getOrdersById);
 module.exports = mainRouter;
