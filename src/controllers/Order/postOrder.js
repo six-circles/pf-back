@@ -1,11 +1,12 @@
 const User = require("../../models/User");
 const Order = require("../../models/Order");
 const jwt = require("jsonwebtoken");
+const Product = require("../../models/Product");
 
 const postOrder = async (req, res) => {
   const { token } = req.body;
   try {
-    if (!token && !shoppingCart) {
+    if (!token) {
       throw Error("Faltan datos");
     }
     const userId = jwt.verify(token, process.env.SECRET_KEY_JWT);
@@ -25,6 +26,14 @@ const postOrder = async (req, res) => {
       shoppingCart: user.shoppingCart,
       user: user._id,
     });
+    const productSC = user.shoppingCart;
+
+    for (const element of productSC) {
+      await Product.findOneAndUpdate(
+        { _id: element._id },
+        { $inc: { stock: -1 } }
+      );
+    }
     res
       .status(200)
       .json({ message: "Order created successfully", order: newOrder });
