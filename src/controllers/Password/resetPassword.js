@@ -11,7 +11,7 @@ const resetPassword = async (req, res) => {
     const payload = jwt.verify(token, secret);
     res.status(200).json({ user: user.name, email: payload.email });
   } catch (error) {
-    res.status(404).json({ error: error.message });
+    res.status(404).json({ message: "Oops something went wrong" });
   }
 };
 module.exports = resetPassword;
