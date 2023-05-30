@@ -42,7 +42,16 @@ const handlerMercadoPago = async (req, res) => {
       },
       auto_return: "approved",
     };
-
+    if (
+      !user.name ||
+      !user.email ||
+      !user.address ||
+      !user.phone ||
+      !user.name ||
+      !user.birthday
+    ) {
+      throw Error("Debes completar tus datos antes de realizar una compra");
+    }
     try {
       const response = await mercadopago.preferences.create(preference);
       console.log(response.body.init_point);
