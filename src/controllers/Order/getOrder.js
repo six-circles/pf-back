@@ -22,6 +22,7 @@ const getOrder = async (req, res) => {
         stock: 1,
         condition: 1,
         enable: 1,
+        cantidadCarrito: 1,
       });
 
     res.status(200).json({ order: order });
