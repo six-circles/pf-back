@@ -10,10 +10,6 @@ const deliverySchema = new Schema(
       type: "string",
       required: true,
     },
-    weight: {
-      type: "number",
-      required: true,
-    },
   },
   {
     timestamps: true,
