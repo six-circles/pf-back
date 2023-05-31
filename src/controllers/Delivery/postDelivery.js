@@ -4,9 +4,9 @@ const Product = require("../../models/Product");
 const jwt = require("jsonwebtoken");
 
 const postDelivery = async (req, res) => {
-  const { token, productsId, type, status } = req.body;
+  const { token, productsId, type } = req.body;
   try {
-    if (!type || !status) {
+    if (!type) {
       throw Error("Faltan datos");
     }
 

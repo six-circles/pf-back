@@ -8,7 +8,7 @@ const deliverySchema = new Schema(
     },
     status: {
       type: "string",
-      required: true,
+      default: "El vendedor esta preparando tu pedido",
     },
     products: {
       type: Array,
