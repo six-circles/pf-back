@@ -23,7 +23,7 @@ const postDelivery = async (req, res) => {
     let seller = [];
     for (element of products) {
       if (!seller.includes(element.user.userId)) {
-        seller.push({ user: element.user, productId: element._id });
+        seller.push(element.user);
       }
     }
     let moreThanOneDelivery = [];
