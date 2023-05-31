@@ -101,7 +101,7 @@ mainRouter.get("/questions/:token", checkLogin, getQuestionsByUser);
 mainRouter.get("/delivery/buyer" /*, checkLogin*/, getDeliveryById);
 mainRouter.get("/delivery/seller", getDeliveryBySellerId);
 mainRouter.post("/delivery" /*, checkLogin*/, postDelivery);
-mainRouter.patch("/delivery/:id", /* checkLogin,*/ updateDelivery);
+mainRouter.patch("/delivery", /* checkLogin,*/ updateDelivery);
 mainRouter.delete("/delivery/:id", checkLogin, deleteDelivery);
 
 mainRouter.get("/:token/shoppingCart", getSC);

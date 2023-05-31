@@ -1,13 +1,12 @@
 const Delivery = require("../../models/Delivery");
 
 const updateDelivery = async (req, res) => {
-  const { id } = req.params;
-  const { status } = req.body;
+  const { status, deliveryId } = req.body;
   try {
     if (!status) {
       throw Error("Faltan datos");
     }
-    const updateDelivery = await Delivery.findByIdAndUpdate(id, {
+    const updateDelivery = await Delivery.findByIdAndUpdate(deliveryId, {
       status: status,
     });
     res.status(200).json({ message: "Producto modificado" });
