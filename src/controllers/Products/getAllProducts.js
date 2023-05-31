@@ -86,6 +86,7 @@ const getAllProducts = async (req, res) => {
           suma += comment.punctuation;
         }
         element.punctuations = suma / element.comments.length;
+        element.save();
       }
     }
 
