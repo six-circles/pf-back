@@ -50,6 +50,8 @@ const resetPassword = require("../controllers/Password/resetPassword");
 const postResetPassword = require("../controllers/Password/postResetPassword");
 const enableUserById = require("../controllers/Users/enableUserById");
 
+const getOrderDeliveries = require("../controllers/Delivery/getOrderDeliveries");
+
 const mainRouter = Router();
 
 mainRouter.use("/login", login);
@@ -113,4 +115,6 @@ mainRouter.post("/order", postOrder);
 mainRouter.get("/order/:orderId/:token", getOrder);
 mainRouter.get("/order/:token", getOrdersById);
 mainRouter.get("/sales/:token", getSales);
+
+mainRouter.get("/deliveries/:orderId", getOrderDeliveries);
 module.exports = mainRouter;

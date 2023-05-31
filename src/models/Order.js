@@ -18,6 +18,19 @@ const orderSchema = new Schema(
         ref: "Product",
       },
     ],
+    delivery: [
+      {
+        type: { type: String },
+        status: {
+          type: String,
+          default: "El vendedor esta preparando tu pedido",
+        },
+        products: {
+          type: Array,
+          ref: "Product",
+        },
+      },
+    ],
   },
   {
     timestamps: true,
