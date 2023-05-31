@@ -11,7 +11,6 @@ const getQuestionsByUser = async (req, res) => {
 
     const questions = await Questions.find()
       .populate("product", {
-        title: 1,
         comments: 0,
         createdAt: 0,
         updatedAt: 0,
@@ -37,6 +36,15 @@ const getQuestionsByUser = async (req, res) => {
       user: {
         _id: user._id,
       },
+    }).populate("product", {
+      comments: 0,
+      createdAt: 0,
+      updatedAt: 0,
+      __v: 0,
+      price: 0,
+      stock: 0,
+      description: 0,
+      questions: 0,
     });
     res.status(200).json(questionsByUser);
   } catch (err) {
