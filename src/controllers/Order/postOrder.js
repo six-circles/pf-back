@@ -2,6 +2,7 @@ const User = require("../../models/User");
 const Order = require("../../models/Order");
 const jwt = require("jsonwebtoken");
 const Product = require("../../models/Product");
+const sendMail = require("../../email/sendEmail");
 
 const postOrder = async (req, res) => {
   const { token } = req.body;
@@ -46,6 +47,43 @@ const postOrder = async (req, res) => {
         }
       );
     }
+    const userSellers = [];
+    const emailSellers = [];
+
+    for (const element of idSellers) {
+      let user = await User.findById(element);
+      userSellers.push(user);
+      emailSellers.push(user.email);
+    }
+
+    listProducts = [];
+    for (const prodVendido of newOrder.shoppingCart) {
+      listProducts.push(prodVendido.title);
+    }
+    listaProductos = listProducts.join(",");
+
+    const listSellers = emailSellers.join(",");
+    await sendMail(
+      user.email,
+      "Compra Exitosa!",
+      null,
+      `<p>Buen dia, ${user.name}, gracias por realizar la compra de: ${listaProductos}. Por favor, comunicate con el/los usuario/s: ${listSellers} para coordinar la entrega.
+      </p>`
+    );
+
+    for (const userSell of userSellers) {
+      for (const prodVendido of newOrder.shoppingCart) {
+        if (prodVendido.user === userSell._id) {
+          await sendMail(
+            userSell.email,
+            "Venta exitosa!",
+            null,
+            `<p>Buen dia, ${userSell.name}, realizaste una venta del producto : ${prodVendido.title}. Por favor comunicate con el usuario: ${user.email}</p>`
+          );
+        }
+      }
+    }
+
     res
       .status(200)
       .json({ message: "Order created successfully", order: newOrder });
