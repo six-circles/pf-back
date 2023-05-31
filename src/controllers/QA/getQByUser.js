@@ -45,6 +45,12 @@ const getQuestionsByUser = async (req, res) => {
       stock: 0,
       description: 0,
       questions: 0,
+      punctuations: 0,
+      condition: 0,
+      user: 0,
+      category: 0,
+      enable: 0,
+      image: 0,
     });
     res.status(200).json(questionsByUser);
   } catch (err) {
