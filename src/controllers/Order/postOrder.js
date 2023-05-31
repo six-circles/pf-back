@@ -65,7 +65,7 @@ const postOrder = async (req, res) => {
       "Compra Exitosa!",
       null,
       `<p>Buen dia, ${user.name}, gracias por realizar la compra de: ${listaProductos}. Por favor, comunicate con el/los usuario/s: ${listSellers} para coordinar la entrega.
-      )}</p>`
+      </p>`
     );
 
     for (const userSell of userSellers) {
