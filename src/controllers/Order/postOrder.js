@@ -58,7 +58,7 @@ const postOrder = async (req, res) => {
       vendedorProducto = `${prodVendido.title} (${user.email})`;
       listProducts.push(vendedorProducto);
     }
-    const listaProductos = listProducts.join(",");
+    const listaProductos = listProducts.join(", ");
 
     await sendMail(
       user.email,
