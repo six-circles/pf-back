@@ -52,9 +52,7 @@ const postProduct = async (req, res) => {
     try {
       console.log("files:", req.files);
       if (req.files.image1) {
-        console.log(req.files.image1);
         const files = req.files.image1;
-        console.log("images", req.files.image1);
         for (let image of files) {
           const result = await cloudinary.uploader.upload(image.path);
           let objImg = {
@@ -65,8 +63,6 @@ const postProduct = async (req, res) => {
           newProduct.save();
         }
       }
-
-      console.log(newProduct);
     } catch (error) {
       console.log(error);
     }
