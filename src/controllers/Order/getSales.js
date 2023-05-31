@@ -8,9 +8,10 @@ const getOrdersById = async (req, res) => {
     const userId = jwt.verify(token, process.env.SECRET_KEY_JWT);
     if (!userId) throw Error("No estas logueado");
 
-    const order = await Order.find({ userComprador: userId.userId }).populate(
-      "shoppingCart",
-      {
+    const order = await Order.find({
+      userVendedor: { $in: [userId.userId] },
+    })
+      .populate("shoppingCart", {
         title: 1,
         image: 1,
         punctuations: 1,
@@ -19,8 +20,17 @@ const getOrdersById = async (req, res) => {
         condition: 1,
         enable: 1,
         user: 1,
-      }
-    );
+      })
+      .populate("userComprador", {
+        _id: 1,
+        email: 1,
+        name: 1,
+      })
+      .populate("userVendedor", {
+        _id: 1,
+        email: 1,
+        name: 1,
+      });
     let finalOrders = [];
     for (element of order) {
       let eachOrder = {};

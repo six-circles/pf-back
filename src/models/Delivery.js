@@ -10,6 +10,10 @@ const deliverySchema = new Schema(
       type: "string",
       required: true,
     },
+    products: {
+      type: Array,
+      ref: "Product",
+    },
   },
   {
     timestamps: true,

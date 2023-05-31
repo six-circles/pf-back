@@ -9,7 +9,12 @@ const getOrder = async (req, res) => {
     if (!userId) throw Error("No estas logueado");
 
     const order = await Order.findById(orderId)
-      .populate("user", {
+      .populate("userComprador", {
+        _id: 1,
+        email: 1,
+        name: 1,
+      })
+      .populate("userVendedor", {
         _id: 1,
         email: 1,
         name: 1,

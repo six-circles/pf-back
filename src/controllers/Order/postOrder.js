@@ -20,11 +20,20 @@ const postOrder = async (req, res) => {
       stock: 1,
       condition: 1,
       enable: 1,
+      user: 1,
     });
-
+    const seller = user.shoppingCart;
+    const idSellers = [];
+    for (element of seller) {
+      if (!idSellers.includes(element.user)) {
+        idSellers.push(element.user);
+      }
+    }
+    console.log(idSellers);
     const newOrder = await Order.create({
       shoppingCart: user.shoppingCart,
-      user: user._id,
+      userComprador: user._id,
+      userVendedor: idSellers,
     });
     const productSC = user.shoppingCart;
 
