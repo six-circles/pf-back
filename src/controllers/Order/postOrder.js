@@ -45,26 +45,26 @@ const postOrder = async (req, res) => {
       );
     }
     const userSellers = [];
-    const emailSellers = [];
 
     for (const element of idSellers) {
       let user = await User.findById(element);
       userSellers.push(user);
-      emailSellers.push(user.email);
     }
 
-    listProducts = [];
+    const listProducts = [];
     for (const prodVendido of newOrder.shoppingCart) {
-      listProducts.push(prodVendido.title);
+      let vendedorProducto = "";
+      let user = await User.findById(prodVendido.user);
+      vendedorProducto = `${prodVendido.title} (${user.email})`;
+      listProducts.push(vendedorProducto);
     }
-    listaProductos = listProducts.join(",");
+    const listaProductos = listProducts.join(",");
 
-    const listSellers = emailSellers.join(",");
     await sendMail(
       user.email,
       "Compra Exitosa!",
       null,
-      `<p>Buen dia, ${user.name}, gracias por realizar la compra de: ${listaProductos}. Por favor, comunicate con el/los usuario/s: ${listSellers} para coordinar la entrega.
+      `<p>Buen dia, ${user.name}, gracias por realizar la compra de: ${listaProductos}. Por favor, comunicate con el/los usuario/s para coordinar la entrega.
       </p>`
     );
 
