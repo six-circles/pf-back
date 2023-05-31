@@ -40,7 +40,7 @@ const postOrder = async (req, res) => {
     for (const element of productSC) {
       await Product.findOneAndUpdate(
         { _id: element._id },
-        { $inc: { stock: -1 } }
+        { $inc: { stock: -1 }, $set: { enable: element.stock > 1 } }
       );
     }
     res
