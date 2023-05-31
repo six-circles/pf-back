@@ -2,7 +2,7 @@ const Delivery = require("../../models/Delivery");
 const jwt = require("jsonwebtoken");
 
 const getDeliveryById = async (req, res) => {
-  const { token } = req.body;
+  const { token } = req.params;
   try {
     const userId = jwt.verify(token, process.env.SECRET_KEY_JWT);
     if (!userId) throw Error("No estas logueado");

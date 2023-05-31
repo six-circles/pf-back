@@ -98,8 +98,8 @@ mainRouter.post("/product/questions/answers", checkLogin, postAnswers);
 mainRouter.delete("/product/questions/answers/:id", checkLogin, deleteAnswers);
 mainRouter.get("/questions/:token", checkLogin, getQuestionsByUser);
 
-mainRouter.get("/delivery/buyer" /*, checkLogin*/, getDeliveryById);
-mainRouter.get("/delivery/seller", getDeliveryBySellerId);
+mainRouter.get("/delivery/buyer/:token" /*, checkLogin*/, getDeliveryById);
+mainRouter.get("/delivery/seller/:token", getDeliveryBySellerId);
 mainRouter.post("/delivery" /*, checkLogin*/, postDelivery);
 mainRouter.patch("/delivery", /* checkLogin,*/ updateDelivery);
 mainRouter.delete("/delivery/:id", checkLogin, deleteDelivery);

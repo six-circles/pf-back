@@ -3,7 +3,7 @@ const jwt = require("jsonwebtoken");
 const mongoose = require("mongoose");
 
 const getDeliveryBySellerId = async (req, res) => {
-  const { token } = req.body;
+  const { token } = req.params;
   try {
     const userId = jwt.verify(token, process.env.SECRET_KEY_JWT);
     if (!userId) throw Error("No estás logueado");
