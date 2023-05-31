@@ -8,11 +8,19 @@ const deliverySchema = new Schema(
     },
     status: {
       type: "string",
-      required: true,
+      default: "El vendedor esta preparando tu pedido",
     },
-    weight: {
-      type: "number",
-      required: true,
+    products: {
+      type: Array,
+      ref: "Product",
+    },
+    seller: {
+      type: Object,
+      ref: "User",
+    },
+    buyer: {
+      type: Schema.Types.ObjectId,
+      ref: "User",
     },
   },
   {

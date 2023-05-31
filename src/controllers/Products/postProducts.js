@@ -1,11 +1,11 @@
 const Product = require("../../models/Product");
 const User = require("../../models/User");
 const jwt = require("jsonwebtoken");
+const cloudinary = require("../../config/cloudinary");
 
 const postProduct = async (req, res) => {
   const {
     title,
-    image,
     description,
     stock,
     price,
@@ -13,11 +13,10 @@ const postProduct = async (req, res) => {
     token,
     category,
     moreCharacteristics,
-  } = req.body;
+  } = req.body.data ? JSON.parse(req.body.data) : req.body;
   try {
     if (
       !title ||
-      !image ||
       !description ||
       !stock ||
       !price ||
@@ -26,7 +25,6 @@ const postProduct = async (req, res) => {
       !category
     )
       throw Error("Faltan datos");
-
     if (
       category !== "Technology" &&
       category !== "Furniture" &&
@@ -42,7 +40,6 @@ const postProduct = async (req, res) => {
 
     const newProduct = await Product.create({
       title: title,
-      image: image,
       description: description,
       stock: stock,
       price: price,
@@ -51,9 +48,29 @@ const postProduct = async (req, res) => {
       category: category,
       moreCharacteristics: moreCharacteristics,
     });
+
+    try {
+      console.log("files:", req.files);
+      if (req.files.image1) {
+        const files = req.files.image1;
+        for (let image of files) {
+          const result = await cloudinary.uploader.upload(image.path);
+          let objImg = {
+            cloudinaryID: result.public_id,
+            url: result.secure_url,
+          };
+          newProduct.image.push(objImg);
+          newProduct.save();
+        }
+      }
+    } catch (error) {
+      console.log(error);
+    }
+
     res.status(201).json({ message: "Product created", user: newProduct });
   } catch (err) {
     res.status(400).json({ error: err.message });
   }
 };
+
 module.exports = postProduct;

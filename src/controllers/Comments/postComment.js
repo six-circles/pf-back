@@ -15,7 +15,17 @@ const postComment = async (req, res) => {
     const user = await User.findById(userId.userId);
 
     const product = await Product.findById(productsId);
+    const comments = await Comments.find({
+      products: {
+        _id: productsId,
+      },
+    });
 
+    for (element of comments) {
+      if (JSON.stringify(element.user) === JSON.stringify(user._id)) {
+        throw Error("Your comment already exists");
+      }
+    }
     const newComment = await Comments.create({
       body: body,
       punctuation: punctuation,
@@ -24,14 +34,6 @@ const postComment = async (req, res) => {
     });
 
     product.comments = product.comments.concat(newComment._id);
-
-    const comments = await Comments.find({ products: { _id: productsId } });
-
-    for (let i = 0; i < comments.length; i++) {
-      suma = comments[i].punctuation + suma;
-    }
-
-    product.punctuations = suma / comments.length;
 
     await product.save();
 

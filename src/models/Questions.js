@@ -9,22 +9,16 @@ const questionsSchema = new Schema({
       ref: "Product",
     },
   ],
-  user: [
-    {
-      type: Schema.Types.ObjectId,
-      ref: "User",
-    },
-  ],
+  user: {
+    type: Schema.Types.ObjectId,
+    ref: "User",
+  },
+
   body: {
     type: "string",
     required: true,
   },
-  answer: [
-    {
-      type: Schema.Types.ObjectId,
-      ref: "Answer",
-    },
-  ],
+  answer: { type: "string" },
 });
 
 module.exports = model("Questions", questionsSchema);

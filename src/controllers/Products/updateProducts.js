@@ -12,6 +12,14 @@ const updateProducts = async (req, res) => {
       enable: enable,
       title: title,
     });
+    if (stock > 0) {
+      await Product.findOneAndUpdate(
+        { _id: productID },
+        {
+          $set: { enable: true },
+        }
+      );
+    }
     res.status(200).json("Producto modificado");
   } catch (error) {
     res.status(404).json({ error: error.message });

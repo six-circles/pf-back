@@ -65,8 +65,8 @@ const getAllProducts = async (req, res) => {
     }
 
     const products = await queryProducts
-      .populate("comments", { products: 0, __v: 0, _id: 0 })
-      .populate("questions", { products: 0, __v: 0, _id: 0 })
+      .populate("comments", { __v: 0 })
+      .populate("questions", { products: 0, __v: 0 })
       .skip(index)
       .limit(13);
 
@@ -78,6 +78,17 @@ const getAllProducts = async (req, res) => {
     });
 
     const pagesFiltered = Math.ceil(productsEnabled.length / 12);
+
+    for (element of productsEnabled) {
+      let suma = 0;
+      if (element.comments.length) {
+        for (comment of element.comments) {
+          suma += comment.punctuation;
+        }
+        element.punctuations = suma / element.comments.length;
+        element.save();
+      }
+    }
 
     if (productsEnabled.length) {
       res.status(200).json({

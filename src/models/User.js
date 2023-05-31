@@ -41,6 +41,20 @@ const userSchema = new Schema(
         ref: "Product",
       },
     ],
+    admin: {
+      type: Boolean,
+      default: false,
+    },
+    products: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "Product",
+      },
+    ],
+    enable: {
+      type: Boolean,
+      default: true,
+    },
   },
   {
     timestamps: true,
