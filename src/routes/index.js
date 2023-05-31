@@ -19,11 +19,6 @@ const getUserByEmail = require("../controllers/Users/getUserByEmail");
 const deleteAnswers = require("../controllers/QA/deleteA");
 const getAnswers = require("../controllers/QA/getA");
 const postAnswers = require("../controllers/QA/postA");
-const postDelivery = require("../controllers/Delivery/postDelivery");
-const getDeliveryById = require("../controllers/Delivery/getDeliveryByBuyerId");
-const updateDelivery = require("../controllers/Delivery/updateDelivery");
-const deleteDelivery = require("../controllers/Delivery/deleteDelivery");
-const getDeliveryBySellerId = require("../controllers/Delivery/getDeliveryBySellerId");
 const postSC = require("../controllers/ShoppingCart/postSC");
 const getSC = require("../controllers/ShoppingCart/getSC");
 const deleteSC = require("../controllers/ShoppingCart/deleteSC");
@@ -97,12 +92,6 @@ mainRouter.get("/product/questions/answers/:id", getAnswers);
 mainRouter.post("/product/questions/answers", checkLogin, postAnswers);
 mainRouter.delete("/product/questions/answers/:id", checkLogin, deleteAnswers);
 mainRouter.get("/questions/:token", checkLogin, getQuestionsByUser);
-
-mainRouter.get("/delivery/buyer/:token" /*, checkLogin*/, getDeliveryById);
-mainRouter.get("/delivery/seller/:token", getDeliveryBySellerId);
-mainRouter.post("/delivery" /*, checkLogin*/, postDelivery);
-mainRouter.patch("/delivery", /* checkLogin,*/ updateDelivery);
-mainRouter.delete("/delivery/:id", checkLogin, deleteDelivery);
 
 mainRouter.get("/:token/shoppingCart", getSC);
 mainRouter.post("/user/shoppingCart", postSC);
