@@ -36,6 +36,21 @@ const getQuestionsByUser = async (req, res) => {
       user: {
         _id: user._id,
       },
+    }).populate("product", {
+      comments: 0,
+      createdAt: 0,
+      updatedAt: 0,
+      __v: 0,
+      price: 0,
+      stock: 0,
+      description: 0,
+      questions: 0,
+      punctuations: 0,
+      condition: 0,
+      user: 0,
+      category: 0,
+      enable: 0,
+      image: 0,
     });
     res.status(200).json(questionsByUser);
   } catch (err) {
