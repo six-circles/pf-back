@@ -11,6 +11,7 @@ const getQuestionsByUser = async (req, res) => {
 
     const questions = await Questions.find()
       .populate("product", {
+        title: 1,
         comments: 0,
         createdAt: 0,
         updatedAt: 0,
