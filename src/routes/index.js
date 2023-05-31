@@ -23,6 +23,7 @@ const postDelivery = require("../controllers/Delivery/postDelivery");
 const getDeliveryById = require("../controllers/Delivery/getDeliveryByBuyerId");
 const updateDelivery = require("../controllers/Delivery/updateDelivery");
 const deleteDelivery = require("../controllers/Delivery/deleteDelivery");
+const getDeliveryBySellerId = require("../controllers/Delivery/getDeliveryBySellerId");
 const postSC = require("../controllers/ShoppingCart/postSC");
 const getSC = require("../controllers/ShoppingCart/getSC");
 const deleteSC = require("../controllers/ShoppingCart/deleteSC");
@@ -97,7 +98,8 @@ mainRouter.post("/product/questions/answers", checkLogin, postAnswers);
 mainRouter.delete("/product/questions/answers/:id", checkLogin, deleteAnswers);
 mainRouter.get("/questions/:token", checkLogin, getQuestionsByUser);
 
-mainRouter.get("/delivery" /*, checkLogin*/, getDeliveryById);
+mainRouter.get("/delivery/buyer" /*, checkLogin*/, getDeliveryById);
+mainRouter.get("/delivery/seller", getDeliveryBySellerId);
 mainRouter.post("/delivery" /*, checkLogin*/, postDelivery);
 mainRouter.patch("/delivery/:id", /* checkLogin,*/ updateDelivery);
 mainRouter.delete("/delivery/:id", checkLogin, deleteDelivery);
