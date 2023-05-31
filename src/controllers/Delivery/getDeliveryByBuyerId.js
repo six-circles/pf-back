@@ -1,10 +1,13 @@
 const Delivery = require("../../models/Delivery");
-const getDeliveryById = async (req, res) => {
-  const { id } = req.params;
-  try {
-    const delivery = await Delivery.findById(id);
+const jwt = require("jsonwebtoken");
 
-    console.log(delivery.products[0]);
+const getDeliveryById = async (req, res) => {
+  const { token } = req.body;
+  try {
+    const userId = jwt.verify(token, process.env.SECRET_KEY_JWT);
+    if (!userId) throw Error("No estas logueado");
+
+    const delivery = await Delivery.find({ buyer: userId.userId });
 
     res.status(200).json(delivery);
   } catch (error) {

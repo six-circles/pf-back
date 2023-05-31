@@ -14,6 +14,14 @@ const deliverySchema = new Schema(
       type: Array,
       ref: "Product",
     },
+    seller: {
+      type: Object,
+      ref: "User",
+    },
+    buyer: {
+      type: Schema.Types.ObjectId,
+      ref: "User",
+    },
   },
   {
     timestamps: true,
