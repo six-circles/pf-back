@@ -124,4 +124,6 @@ mainRouter.post("/order", postOrder);
 mainRouter.get("/order/:orderId/:token", getOrder);
 mainRouter.get("/order/:token", getOrdersById);
 mainRouter.get("/sales/:token", getSales);
+
+mainRouter.get("/deliveries/:orderId", getOrderDeliveries);
 module.exports = mainRouter;
