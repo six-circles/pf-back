@@ -17,7 +17,6 @@ const getQuestions = async (req, res) => {
       })
       .populate("user", {
         phone: 0,
-        name: 1,
         password: 0,
         birthday: 0,
         createdAt: 0,
