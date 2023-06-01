@@ -102,12 +102,12 @@ mainRouter.get("/questions/:token", checkLogin, getQuestionsByUser);
 // mainRouter.delete("/delivery/:id", checkLogin, deleteDelivery);
 
 mainRouter.get("/:token/shoppingCart", getSC);
-mainRouter.post("/user/shoppingCart", postSC);
+mainRouter.post("/user/shoppingCart", checkLogin, postSC);
 mainRouter.delete("/:token/shoppingCart/:productID", deleteSC);
 mainRouter.delete("/shoppingCart/:token", eraseSC);
 
 mainRouter.get("/:token/favorites", getFavorites);
-mainRouter.post("/user/favorites", postFavorites);
+mainRouter.post("/user/favorites", checkLogin, postFavorites);
 mainRouter.delete("/:token/favorites/:productID", deleteFavorites);
 
 mainRouter.get("/auth/google", goToGoogle);
