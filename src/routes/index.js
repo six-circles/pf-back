@@ -55,6 +55,8 @@ const resetPassword = require("../controllers/Password/resetPassword");
 const postResetPassword = require("../controllers/Password/postResetPassword");
 const enableUserById = require("../controllers/Users/enableUserById");
 
+const getOrderDeliveries = require("../controllers/Delivery/getOrderDeliveries");
+
 const mainRouter = Router();
 
 mainRouter.use("/login", login);
@@ -101,7 +103,7 @@ mainRouter.get("/questions/:token", checkLogin, getQuestionsByUser);
 mainRouter.get("/delivery/buyer/:token" /*, checkLogin*/, getDeliveryById);
 mainRouter.get("/delivery/seller/:token", getDeliveryBySellerId);
 mainRouter.post("/delivery" /*, checkLogin*/, postDelivery);
-mainRouter.patch("/delivery", /* checkLogin,*/ updateDelivery);
+mainRouter.patch("/delivery/:id", /* checkLogin,*/ updateDelivery);
 mainRouter.delete("/delivery/:id", checkLogin, deleteDelivery);
 
 mainRouter.get("/:token/shoppingCart", getSC);

@@ -29,7 +29,7 @@ const updateDelivery = async (req, res) => {
   // El status debería ser 0, 1 o 2. 0 para pendiente, 1 para en proceso y 2 para entregado.
   const { vendorId, status } = req.body;
   try {
-    if (!status || typeof status !== 'number' || !req.params.id) {
+    if (status === undefined || !req.params.id) {
       throw Error("Faltan datos");
     }
     const order = await Order.findById(req.params.id);
@@ -37,6 +37,7 @@ const updateDelivery = async (req, res) => {
     await Order.findByIdAndUpdate(req.params.id, { status: updateStatus(orderStatus, vendorId, status) });
     res.status(200).json({ message: "Producto modificado" });
   } catch (error) {
+    console.log(error)
     res.status(400).json({ error: error.message });
   }
 };
