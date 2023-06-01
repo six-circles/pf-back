@@ -11,7 +11,7 @@ mercadopago.configure({
 const handlerMercadoPago = async (req, res) => {
   const { shoppingCart } = req.body;
   const { token } = req.params;
-  const URL = `${URL_FRONT}/`;
+  const URL = `${URL_FRONT}`;
   try {
     const userId = jwt.verify(token, process.env.SECRET_KEY_JWT);
     if (!userId) throw Error("No estas logueado");
