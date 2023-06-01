@@ -44,10 +44,7 @@ const googleLogin = async (req, res) => {
         { userId: newUserFind._id },
         process.env.SECRET_KEY_JWT
       );
-      res.redirect(
-        307,
-        `http://localhost:5173?token=${token}&user=${newUser.name}`
-      );
+      res.redirect(307, `${URL_FRONT}?token=${token}&user=${newUser.name}`);
     }
   } catch (error) {
     res.status(500).send("Error en la autenticación con Google");
