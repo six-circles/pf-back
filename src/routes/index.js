@@ -50,6 +50,9 @@ const resetPassword = require("../controllers/Password/resetPassword");
 const postResetPassword = require("../controllers/Password/postResetPassword");
 const enableUserById = require("../controllers/Users/enableUserById");
 
+const getOrderDeliveries = require("../controllers/Delivery/getOrderDeliveries");
+const updateDelivery = require("../controllers/Delivery/updateDelivery");
+
 const mainRouter = Router();
 
 mainRouter.use("/login", login);
@@ -93,6 +96,11 @@ mainRouter.post("/product/questions/answers", checkLogin, postAnswers);
 mainRouter.delete("/product/questions/answers/:id", checkLogin, deleteAnswers);
 mainRouter.get("/questions/:token", checkLogin, getQuestionsByUser);
 
+// mainRouter.get("/delivery/buyer/:token" /*, checkLogin*/, getDeliveryById);
+// mainRouter.get("/delivery/seller/:token", getDeliveryBySellerId);
+// mainRouter.post("/delivery" /*, checkLogin*/, postDelivery);
+// mainRouter.delete("/delivery/:id", checkLogin, deleteDelivery);
+
 mainRouter.get("/:token/shoppingCart", getSC);
 mainRouter.post("/user/shoppingCart", postSC);
 mainRouter.delete("/:token/shoppingCart/:productID", deleteSC);
@@ -113,4 +121,7 @@ mainRouter.post("/order", postOrder);
 mainRouter.get("/order/:orderId/:token", getOrder);
 mainRouter.get("/order/:token", getOrdersById);
 mainRouter.get("/sales/:token", getSales);
+
+mainRouter.get("/deliveries/:orderId", getOrderDeliveries);
+mainRouter.patch("/delivery/:id", /* checkLogin,*/ updateDelivery);
 module.exports = mainRouter;
