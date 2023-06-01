@@ -12,8 +12,7 @@ function getStatus(input, userId) {
     }
   }
 
-  // Return a message if the user was not found
-  return "User not found.";
+  return "0";
 }
 
 const getOrderDeliveries = async (req, res) => {
